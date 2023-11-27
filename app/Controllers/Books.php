@@ -224,4 +224,13 @@ class Books extends BaseController
 
         return view('books/detail', $data);
     }
+
+    public function create() {
+        $data = [
+            'title' => 'Add Book | JustBookStore',
+            'page' => 'add-book'
+        ];
+
+        return view('books/create', $data);
+    }
 }

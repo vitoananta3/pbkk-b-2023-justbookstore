@@ -8,6 +8,7 @@ use CodeIgniter\Router\RouteCollection;
 $routes->get('/', 'Page::index');
 
 $routes->get('/books', 'Books::index');
+$routes->get('/books/create', 'Books::create');
 $routes->get('/books/(:segment)', 'Books::detail/$1');  
 
 $routes->get('/signin', 'Auth::signin');
