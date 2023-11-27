@@ -1,0 +1,13 @@
+.active-nav-item {
+    color: #81A1C1;
+}
+
+.card {
+    width: calc(100% / 8);
+}
+
+.card-image {
+    width: 100%;
+    object-fit: cover;
+    object-position: center;
+}
