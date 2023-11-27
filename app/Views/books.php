@@ -1,4 +1,4 @@
-<!-- <?php $this->setVar('pageTitle', "- Catalog"); ?> -->
+<!-- <?php $this->setVar('pageTitle', "- Books"); ?> -->
 <?= $this->extend('layout\default') ?>
 <?= $this->section('content') ?>
 <?= $this->include('component/guest/navbar') ?>
@@ -7,7 +7,7 @@
     <div class="mt-4"></div>
     <div class="max-w-screen-xl flex flex-wrap gap-4 justify-between">
         <?php foreach ($books as $book) : ?>
-            <a href="<?php base_url() ?>catalog/<?php $id = $book['id']; echo $id; ?>" class="bg-[#E5E9F0] rounded-md text-[#434C5E] hover:bg-[#81A1C1] hover:text-[#434C5E] card p-2 outline">
+            <a href="<?php base_url() ?>books/<?php $id = $book['id']; echo $id; ?>" class="bg-[#E5E9F0] rounded-md text-[#434C5E] hover:bg-[#81A1C1] hover:text-[#434C5E] card p-2 outline">
                 <div class="flex flex-col">
                     <img class="card-image" src="<?= base_url() ?>assets/images/cover-2.jpg" alt="product image" />
                     <div class="flex flex-col pt-2 gap-2">

@@ -52,7 +52,7 @@
                     <div class="mb-12 self-end">
                         <button
                             class="text-sm bg-[#434C5E] hover:bg-[#81A1C1] text-[#E5E9F0] hover:text-[#434C5E] rounded-md px-5 py-2.5 transition-colors duration-200 opacity-70">
-                            <a href="/catalog">Back to Catalog</a>
+                            <a href="/books">Back to Books</a>
                         </button>
                     </div>
                 </div>

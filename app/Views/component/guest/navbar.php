@@ -37,7 +37,7 @@
           <a href="<?= base_url() ?>" class="block py-2 px-3 text-[#E5E9F0] rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-[#81A1C1] md:p-0 dark:text-white md:dark:hover:text-[#81A1C1] dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent <?php echo $page === 'home' ? 'active-nav-item' : ''; ?>">Home</a>
         </li>
         <li>
-          <a href="<?= base_url() ?>catalog" class="block py-2 px-3 text-[#E5E9F0] rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-[#81A1C1] md:p-0 dark:text-white md:dark:hover:text-[#81A1C1] dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent <?php echo $page === 'catalog' ? 'active-nav-item' : ''; ?>">Catalog</a>
+          <a href="<?= base_url() ?>books" class="block py-2 px-3 text-[#E5E9F0] rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-[#81A1C1] md:p-0 dark:text-white md:dark:hover:text-[#81A1C1] dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent <?php echo $page === 'books' ? 'active-nav-item' : ''; ?>">Books</a>
         </li>
         <!-- <li><?php echo "$page" ?></li> -->
       </ul>

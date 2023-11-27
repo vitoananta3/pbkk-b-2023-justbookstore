@@ -13,11 +13,11 @@ class Page extends BaseController
         return view('home', $data);
     }
 
-    public function catalog(): string
+    public function books(): string
     {
         $data = [
-            'title' => 'Catalog | JustBookStore',
-            'page' => 'catalog',
+            'title' => 'Books | JustBookStore',
+            'page' => 'books',
             'books' => [
                 'book-1' => [
                     'id' => '1',
@@ -189,6 +189,6 @@ class Page extends BaseController
                 ],
             ]
         ];
-        return view('catalog', $data);
+        return view('books', $data);
     }
 }
