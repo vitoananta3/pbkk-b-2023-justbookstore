@@ -2,12 +2,16 @@
     color: #81A1C1;
 }
 
-.card {
-    width: calc(100% / 8);
-}
+/* .card { */
+    /* width: calc(100% / 8); */
+/* } */
 
 .card-image {
     width: 100%;
-    object-fit: cover;
-    object-position: center;
+    /* object-fit: cover; */
+    /* object-position: center; */
+}
+
+.spa {
+    height: calc(100vh - 4rem);
 }
