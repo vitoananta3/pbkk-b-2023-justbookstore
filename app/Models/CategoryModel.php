@@ -55,4 +55,9 @@ class CategoryModel extends Model
     {
         return $this->where(['slug' => $slug])->first();
     }
+
+    public function getCategoryById($id)
+    {
+        return $this->where(['id' => $id])->first();
+    }   
 }

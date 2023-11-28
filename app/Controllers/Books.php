@@ -37,7 +37,7 @@ class Books extends BaseController
             'title' => 'Book Detail | JustBookStore',
             'page' => 'books',
             'book' => $book,
-            'categories' => $this->categoriesModel->getCategory($category_id)
+            'categories' => $this->categoriesModel->getCategoryById($category_id)
         ];
 
         return view('books/detail', $data);
