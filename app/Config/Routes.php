@@ -9,6 +9,7 @@ $routes->get('/', 'Page::index');
 
 $routes->get('/books', 'Books::index');
 $routes->get('/books/create', 'Books::create');
+$routes->post('/books/save', 'Books::save');
 $routes->get('/books/(:segment)', 'Books::detail/$1');  
 
 $routes->get('/categories', 'Categories::index');

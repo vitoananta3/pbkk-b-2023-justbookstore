@@ -38,11 +38,21 @@ class CategoryModel extends Model
     // protected $beforeDelete   = [];
     // protected $afterDelete    = [];
 
-    public function getCategories() {
+    public function getCategories()
+    {
         return $this->findAll();
     }
 
-    public function getCategory($slug) {
+    public function getCategoryIds()
+    {
+        $categories = $this->findAll();
+        $categoryIds = array_column($categories, 'id');
+
+        return $categoryIds;
+    }
+
+    public function getCategory($slug)
+    {
         return $this->where(['slug' => $slug])->first();
     }
 }
