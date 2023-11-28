@@ -31,7 +31,7 @@
     <?php endif; ?>
     <div class="flex flex-wrap gap-6 max-w-screen-xl mx-auto py-8">
         <?php foreach ($categories as $category) : ?>
-            <a href="<?php base_url() ?>categories/<?php $slug = $category['slug'];
+            <a href="<?php base_url() ?>/categories/<?php $slug = $category['slug'];
                                                     echo $slug; ?>" class="bg-[#E5E9F0] rounded-md text-[#434C5E] hover:bg-[#81A1C1] hover:text-[#434C5E] p-2 outline">
                 <?= $name = $category['name']; ?>
             </a>

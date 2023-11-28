@@ -131,7 +131,7 @@ class Categories extends BaseController
     {
         $data = [
             'title' => 'Category Detail | JustBookStore',
-            'page' => 'category-detail',
+            'page' => 'categories',
             'category' => $this->categoriesModel->getCategory($slug),
         ];
 
@@ -148,7 +148,7 @@ class Categories extends BaseController
     {
         $data = [
             'title' => 'Add Category | JustBookStore',
-            'page' => 'add-category',
+            'page' => 'categories',
             'validation' => session('data') ? session('data')['validation'] : \Config\Services::validation()
         ];
         return view('categories/create', $data);
@@ -159,13 +159,20 @@ class Categories extends BaseController
         $validation = \Config\Services::validation();
 
         $rules = [
-            'name' => 'required|is_unique[categories.name]|max_length[32]'
+            'name' => [
+                'rules' => 'required|is_unique[categories.name]|max_length[32]',
+                'errors' => [
+                    'required' => 'Name is required.',
+                    'is_unique' => 'Name already exists.',
+                    'max_length' => 'Name is too long (max 32 characters).'
+                ]
+            ]
         ];
 
         if (!$this->validate($rules)) {
             $data = [
                 'title' => 'Add Category | JustBookStore',
-                'page' => 'add-category',
+                'page' => 'categories',
                 'validation' => $validation
             ];
             return redirect()->to('/categories/create')->withInput()->with('data', $data);
@@ -177,6 +184,64 @@ class Categories extends BaseController
         ]);
 
         session()->setFlashdata('message', 'New category has been added.');
+        return redirect()->to('/categories');
+    }
+
+    public function edit($slug)
+    {
+        $data = [
+            'title' => 'Edit Category | JustBookStore',
+            'page' => 'categories',
+            'validation' => session('data') ? session('data')['validation'] : \Config\Services::validation(),
+            'category' => $this->categoriesModel->getCategory($slug)
+        ];
+
+        return view('categories/edit', $data);
+    }
+
+    public function delete($id)
+    {
+        $this->categoriesModel->delete($id);
+        session()->setFlashdata('message', 'Category has been deleted.');
+        return redirect()->to('/categories');
+    }
+
+    public function update($id) {
+        $validation = \Config\Services::validation();
+
+        $rules = [
+            'name' => [
+                'rules' => 'required|is_unique[categories.name]|max_length[32]',
+                'errors' => [
+                    'required' => 'Name is required.',
+                    'is_unique' => 'Name already exists.',
+                    'max_length' => 'Name is too long (max 32 characters).'
+                ]
+            ]
+        ];
+
+        // name checking
+        // $oldCategory = $this->categoriesModel->getCategory($this->request->getVar('slug'));
+        // if ($oldCategory['name'] == $this->request->getVar('name')) {
+        //     unset($rules['name']['rules'][1]);
+        // }
+
+        if (!$this->validate($rules)) {
+            $data = [
+                'title' => 'Add Category | JustBookStore',
+                'page' => 'categories',
+                'validation' => $validation
+            ];
+            return redirect()->to('/categories/edit/'. $this->request->getVar('slug'))->withInput()->with('data', $data);
+        }
+
+        $this->categoriesModel->save([
+            'id' => $id,
+            'name' => $this->request->getVar('name'),
+            'slug' => url_title($this->request->getVar('name'), '-', true)
+        ]);
+
+        session()->setFlashdata('message', 'Category has been edited.');
         return redirect()->to('/categories');
     }
 }
