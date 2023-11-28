@@ -1,4 +1,3 @@
-<!-- <?php $this->setVar('pageTitle', "- Books"); ?> -->
 <?= $this->extend('layout\default') ?>
 <?= $this->section('content') ?>
 <?= $this->include('component/guest/navbar') ?>

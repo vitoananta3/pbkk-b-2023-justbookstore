@@ -34,7 +34,7 @@ class Books extends BaseController
 
         $data = [
             'title' => 'Book Detail | JustBookStore',
-            'page' => 'book-detail',
+            'page' => 'books',
             'book' => $book,
             'categories' => $this->categoriesModel->getCategory($category_id)
         ];
@@ -45,7 +45,7 @@ class Books extends BaseController
     public function create() {
         $data = [
             'title' => 'Add Book | JustBookStore',
-            'page' => 'add-book'
+            'page' => 'books'
         ];
 
         return view('books/create', $data);
