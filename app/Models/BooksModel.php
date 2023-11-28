@@ -38,11 +38,13 @@ class BooksModel extends Model
     // protected $beforeDelete   = [];
     // protected $afterDelete    = [];
 
-    public function getBooks($slug = false) {
-        if ($slug == false) {
-            return $this->findAll();
-        }
+    public function getBooks()
+    {
+        return $this->findAll();
+    }
 
+    public function getBook($slug)
+    {
         return $this->where(['slug' => $slug])->first();
     }
 }

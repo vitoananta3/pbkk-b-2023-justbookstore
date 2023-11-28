@@ -97,13 +97,6 @@ class Categories extends BaseController
         return view('categories/edit', $data);
     }
 
-    public function delete($id)
-    {
-        $this->categoriesModel->delete($id);
-        session()->setFlashdata('message', 'Category has been deleted.');
-        return redirect()->to('/categories');
-    }
-
     public function update($id) {
         $validation = \Config\Services::validation();
 
@@ -126,7 +119,7 @@ class Categories extends BaseController
 
         if (!$this->validate($rules)) {
             $data = [
-                'title' => 'Add Category | JustBookStore',
+                'title' => 'Update Category | JustBookStore',
                 'page' => 'categories',
                 'validation' => $validation
             ];
@@ -140,6 +133,13 @@ class Categories extends BaseController
         ]);
 
         session()->setFlashdata('message', 'Category has been edited.');
+        return redirect()->to('/categories');
+    }
+
+    public function delete($id)
+    {
+        $this->categoriesModel->delete($id);
+        session()->setFlashdata('message', 'Category has been deleted.');
         return redirect()->to('/categories');
     }
 }
