@@ -13,8 +13,7 @@ $routes->post('/books/save', 'Books::save');
 $routes->get('/books/edit/(:segment)', 'Books::edit/$1');
 $routes->put('/books/update/(:num)', 'Books::update/$1');
 $routes->delete('/books/(:num)', 'Books::delete/$1');
-
-$routes->get('/books/(:segment)', 'Books::detail/$1');  
+$routes->get('/books/(:any)', 'Books::detail/$1');  
 
 $routes->get('/categories', 'Categories::index');
 $routes->get('/categories/create', 'Categories::create');

@@ -31,6 +31,9 @@ class Books extends BaseController
     public function detail($slug)
     {
         $book = $this->booksModel->getBook($slug);
+        if (empty($book)) {
+            throw new \CodeIgniter\Exceptions\PageNotFoundException('Book ' . $slug . ' not found.');
+        }
         $category_id = $book['category_id'];
 
         $data = [
@@ -39,6 +42,11 @@ class Books extends BaseController
             'book' => $book,
             'category' => $this->categoriesModel->getCategoryById($category_id)
         ];
+
+        if (empty($data['book'])) {
+            throw new \CodeIgniter\Exceptions\PageNotFoundException('Data Book ' . $slug . ' not found.');
+        }
+
         return view('books/detail', $data);
     }
 
@@ -118,6 +126,13 @@ class Books extends BaseController
             return redirect()->to('/books/create')->withInput()->with('data', $data);
         }
 
+        $noCover = 'no-cover.jpg';
+        if ($this->request->getVar('cover') == '') {
+            $cover = $noCover;
+        } else {
+            $cover = $this->request->getVar('cover');
+        }
+
         $this->booksModel->save([
             'title' => $this->request->getVar('title'),
             'slug' => url_title($this->request->getVar('title'), '-', true),
@@ -127,7 +142,7 @@ class Books extends BaseController
             'category_id' => $this->request->getVar('category_id'),
             'price' => $this->request->getVar('price'),
             'stock' => $this->request->getVar('stock'),
-            'cover' => $this->request->getVar('cover')
+            'cover' => $cover
         ]);
 
         session()->setFlashdata('message', 'New Book has been added.');
@@ -142,7 +157,6 @@ class Books extends BaseController
             'validation' => session('data') ? session('data')['validation'] : \Config\Services::validation(),
             'book' => $this->booksModel->getBook($slug),
             'categories' => $this->categoriesModel->getCategories(),
-            'category' => $this->categoriesModel->getCategoryById($this->booksModel->getBook($slug)['category_id'])
         ];
 
         return view('books/edit', $data);
@@ -150,6 +164,7 @@ class Books extends BaseController
 
     public function update($id)
     {
+        // dd($this->request->getVar());
         $categoryIds = $this->categoriesModel->getCategoryIds();
 
         $validation = \Config\Services::validation();
