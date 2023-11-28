@@ -14,7 +14,7 @@
                     <div class="my-4"></div>
                     <div class="text-sm flex flex-col justify-center">
                         <?=  form_label('Email', 'email') ?>
-                        <?= form_input('email', '', ['class' => 'mt-2 block w-full rounded-lg bg-white px-3 py-2 border-2 border-[#434C5E]', 'placeholder' => 'Email']) ?>
+                        <?= form_input('email', '', ['class' => 'mt-2 block w-full rounded-lg bg-white px-3 py-2 border-2 border-[#434C5E]', 'placeholder' => 'Email', 'autofocus' => 'autofocus']) ?>
                     </div>
                     <div class="my-4"></div>
                     <div class="text-sm flex flex-col justify-center">

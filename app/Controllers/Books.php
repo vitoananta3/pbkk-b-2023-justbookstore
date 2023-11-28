@@ -4,14 +4,17 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 use App\Models\BooksModel;
+use App\Models\CategoryModel;
 
 class Books extends BaseController
 {
     protected $booksModel;
+    protected $categoriesModel;
 
     public function __construct()
     {
         $this->booksModel = new BooksModel();
+        $this->categoriesModel = new CategoryModel();
     }
 
     public function index()
@@ -214,12 +217,14 @@ class Books extends BaseController
 
     public function detail($slug) {
         $book = $this->booksModel->getBooks($slug);
+        $category_id = $book['category_id'];
         // dd($book);
 
         $data = [
             'title' => 'Book Detail | JustBookStore',
             'page' => 'book-detail',
-            'book' => $book
+            'book' => $book,
+            'categories' => $this->categoriesModel->getCategory($category_id)
         ];
 
         return view('books/detail', $data);

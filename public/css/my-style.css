@@ -15,3 +15,12 @@
 .spa {
     height: calc(100vh - 4rem);
 }
+
+.fade-out {
+    transition: opacity 1s ease-in-out; /* Define the transition effect */
+    opacity: 1; /* Initially set opacity to fully visible */
+}
+
+.fade-out.hide {
+    opacity: 0; /* Set opacity to fully transparent when the 'hide' class is added */
+}
