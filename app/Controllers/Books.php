@@ -52,10 +52,12 @@ class Books extends BaseController
         $data = [
             'title' => 'Add Book | JustBookStore',
             'page' => 'books',
-            'validation' => session('data') ? session('data')['validation'] : \Config\Services::validation(),
+            'validation' => session('validation_errors'),
             'categories' => $this->categoriesModel->getCategories()
         ];
-
+        // if (session('validation_errors') && array_key_exists('title', session('validation_errors'))) {
+        //     dd($data['validation']);
+        // }
         return view('books/create', $data);
     }
 
@@ -125,12 +127,8 @@ class Books extends BaseController
         ];
 
         if (!$this->validate($rules)) {
-            $data = [
-                'title' => 'Add Book | JustBookStore',
-                'page' => 'books',
-                'validation' => $validation
-            ];
-            return redirect()->to('/books/create')->withInput()->with('data', $data);
+            session()->setFlashdata('validation_errors', $validation->getErrors());
+            return redirect()->to('/books/create')->withInput();
         }
 
         $noCover = 'no-cover.jpg';
