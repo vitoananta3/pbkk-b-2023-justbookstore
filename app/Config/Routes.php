@@ -27,3 +27,4 @@ $routes->get('/signin', 'Users::viewSignin');
 $routes->post('/auth/signin', 'Users::signIn');
 $routes->get('/signup', 'Users::viewSignup');
 $routes->post('/auth/signup', 'Users::signUp');
+$routes->get('/signout', 'Users::signOut');

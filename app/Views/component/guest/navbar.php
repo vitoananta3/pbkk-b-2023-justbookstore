@@ -11,17 +11,32 @@
             <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
           </svg>
         </div>
-        <span class="pl-3 block text-sm text-[#E5E9F0]">Guest</span>
+        <?php if (session()->has('user')) : ?>
+          <?php $user = session()->get('user'); ?>
+          <!-- Check if user is logged in -->
+          <span class="pl-3 block text-sm text-[#E5E9F0]">
+            <?= esc($user['firstName']) . ' ' . $user['lastName'] ?>
+          </span>
+        <?php else : ?>
+          <!-- If user is not logged in, show default "Guest" text -->
+          <span class="pl-3 block text-sm text-[#E5E9F0]">Guest</span>
+        <?php endif; ?>
       </button>
       <!-- Dropdown menu -->
       <div class="z-50 hidden my-4 text-base list-none bg-[#434C5E] divide-y divide-gray-100 rounded-lg shadow dark:divide-gray-600" id="user-dropdown">
         <ul class="py-2" aria-labelledby="user-menu-button">
-          <li>
-            <a href="<?= base_url() ?>signin" class="block px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-600 text-[#E5E9F0] dark:hover:text-white">Sign In</a>
-          </li>
-          <li>
-            <a href="<?= base_url() ?>signup  " class="block px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-600 text-[#E5E9F0] dark:hover:text-white">Sign Up</a>
-          </li>
+          <?php if (session()->has('user')) : ?>
+            <li>
+              <a href="<?= base_url() ?>signout" class="block px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-600 text-[#E5E9F0] dark:hover:text-white">Sign Out</a>
+            </li>
+          <?php else : ?>
+            <li>
+              <a href="<?= base_url() ?>signin" class="block px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-600 text-[#E5E9F0] dark:hover:text-white">Sign In</a>
+            </li>
+            <li>
+              <a href="<?= base_url() ?>signup  " class="block px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-600 text-[#E5E9F0] dark:hover:text-white">Sign Up</a>
+            </li>
+          <?php endif; ?>
         </ul>
       </div>
       <button data-collapse-toggle="navbar-user" type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-user" aria-expanded="false">

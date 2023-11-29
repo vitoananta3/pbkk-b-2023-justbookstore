@@ -138,4 +138,9 @@ class Users extends BaseController
             return redirect()->to('/signin')->withInput();
         }   
     }
+
+    public function signOut() {
+        session()->destroy();
+        return redirect()->to('/signin');
+    }
 }
