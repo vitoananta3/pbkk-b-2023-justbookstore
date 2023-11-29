@@ -33,8 +33,7 @@
             <a href="<?php base_url() ?>books/<?php $id = $book['id'];
                                                 echo $id; ?>" class="bg-[#E5E9F0] rounded-md text-[#434C5E] hover:bg-[#81A1C1] hover:text-[#434C5E] p-2 outline">
                 <div class="flex flex-col">
-                    <img class="card-image" src="<?= base_url(); ?>/assets/images/<?php $path = $book['cover'];
-                                                                                    echo $path ?>" alt="">
+                    <img class="card-image" src="<?= base_url(); ?>assets/books-cover/<?= $book['cover']; ?>" alt="">
                     <div class="flex flex-col pt-2 gap-2">
                         <div class="font-semibold text-sm">
                             <?php

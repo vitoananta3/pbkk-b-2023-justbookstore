@@ -115,9 +115,8 @@ class Books extends BaseController
                 ]
             ],
             'cover' => [
-                'rules' => 'uploaded[cover]|max_size[cover,1024]|is_image[cover]|mime_in[cover,image/jpg,image/jpeg,image/png]|max_dims[cover,510,784]',
+                'rules' => 'max_size[cover,1024]|is_image[cover]|mime_in[cover,image/jpg,image/jpeg,image/png]|max_dims[cover,510,784]',
                 'errors' => [
-                    'uploaded' => 'Cover is required.',
                     'max_size' => 'Cover file size is too big. (max 1MB)',
                     'is_image' => 'Cover is not an image.',
                     'mime_in' => 'Cover is not an image.',
@@ -131,12 +130,22 @@ class Books extends BaseController
             return redirect()->to('/books/create')->withInput();
         }
 
-        $noCover = 'no-cover.jpg';
-        if ($this->request->getVar('cover') == '') {
-            $cover = $noCover;
+        $coverFile = $this->request->getFile('cover');
+        // dd($coverFile);
+
+        if ($coverFile->getError() == 4) {
+            $coverFileName = 'no-cover.jpg';
         } else {
-            $cover = $this->request->getVar('cover');
+            $coverFile->move('assets/books-cover');
+            $coverFileName = $coverFile->getName();
         }
+
+        // $noCover = 'no-cover.jpg';
+        // if ($this->request->getVar('cover') == '') {
+        //     $cover = $noCover;
+        // } else {
+        //     $cover = $this->request->getVar('cover');
+        // }
 
         $this->booksModel->save([
             'title' => $this->request->getVar('title'),
@@ -147,7 +156,7 @@ class Books extends BaseController
             'category_id' => $this->request->getVar('category_id'),
             'price' => $this->request->getVar('price'),
             'stock' => $this->request->getVar('stock'),
-            'cover' => $cover
+            'cover' => $coverFileName
         ]);
 
         session()->setFlashdata('message', 'New Book has been added.');

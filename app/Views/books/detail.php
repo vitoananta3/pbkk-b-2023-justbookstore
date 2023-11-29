@@ -44,8 +44,7 @@
     <div class="my-4"></div>
     <div class="flex spa-2 w-full max-w-screen-xl">
         <div class="flex w-1/2 border border-r-black pr-4">
-            <img class="card-image object-contain" src="<?= base_url(); ?>/assets/images/<?php $path = $book['cover'];
-                                                                                            echo $path ?>" alt="book-cover">
+            <img class="card-image object-contain" src="<?= base_url(); ?>assets/books-cover/<?= $book['cover']; ?>" alt="book-cover">
         </div>
         <div class="flex flex-col w-1/2 justify-between h-full pl-4">
             <div class="flex flex-col gap-2">
