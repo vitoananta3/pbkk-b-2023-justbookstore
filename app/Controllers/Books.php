@@ -229,6 +229,15 @@ class Books extends BaseController
                     'required' => 'Stock is required.',
                     'numeric' => 'Stock must be a number.'
                 ]
+            ],
+            'cover' => [
+                'rules' => 'max_size[cover,1024]|is_image[cover]|mime_in[cover,image/jpg,image/jpeg,image/png]|max_dims[cover,510,784]',
+                'errors' => [
+                    'max_size' => 'Cover file size is too big. (max 1MB)',
+                    'is_image' => 'Cover is not an image.',
+                    'mime_in' => 'Cover is not an image.',
+                    'max_dims' => 'Cover dimension is too big. (max 510x784)'
+                ]
             ]
         ];
 
@@ -241,6 +250,18 @@ class Books extends BaseController
             return redirect()->to('/books/edit/' . $this->request->getVar('slug'))->withInput()->with('data', $data);
         }
 
+        $coverFile = $this->request->getFile('cover');
+
+        if ($coverFile->getError() == 4) {
+            $coverFile = $this->request->getVar('oldCover');
+        } else {
+            $coverFile->move('assets/books-cover');
+            $coverFile = $coverFile->getName();
+            if ($this->request->getVar('oldCover') != 'no-cover.jpg') {
+                unlink('assets/books-cover/' . $this->request->getVar('oldCover'));
+            }
+        }
+
         $this->booksModel->save([
             'id' => $id,
             'title' => $this->request->getVar('title'),
@@ -251,7 +272,7 @@ class Books extends BaseController
             'category_id' => $this->request->getVar('category_id'),
             'price' => $this->request->getVar('price'),
             'stock' => $this->request->getVar('stock'),
-            'cover' => $this->request->getVar('cover')
+            'cover' => $coverFile
         ]);
 
         session()->setFlashdata('message', 'Book has been edited.');

@@ -88,33 +88,19 @@
                                             if (session('validation_errors') && array_key_exists('cover', session('validation_errors')) && session('validation_errors')['cover']) {
                                                 echo session('validation_errors')['cover'];
                                             }
-                                            ?></div>
-                <div class="text-[#434C5E] font-light">If there is <span class="font-medium">NO</span> cover for the book, click download button to download default cover.</div>
-                <div>
-                    <a href="https://drive.google.com/u/0/uc?id=1Z_Z_ByJ2TIB_eUwWbnzqxHNb5bZvoZkY&export=download" download="" data-tooltip-target="data-tooltip" data-tooltip-placement="bottom" class="hidden sm:inline-flex items-center justify-center text-[#434C5E] w-8 h-8 dark:text-[#434C5E] hover:bg-[#E5E9F0] dark:hover:bg-[#81A1C1] focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm border border-[#434C5E]">
-                        <svg class="w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 18">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 1v11m0 0 4-4m-4 4L4 8m11 4v3a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-3" />
-                        </svg>
-                        <span class="sr-only">Download data</span>
-                    </a>
-                    <div id="data-tooltip" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm text-[#E5E9F0] transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
-                        Download Default Cover
-                        <div class="tooltip-arrow" data-popper-arrow></div>
-                    </div>
+                                            ?>
                 </div>
-                <div class="text-[#434C5E] font-light">Insert that default cover to form upload for cover above.</div>
+                <div class="my-8"></div>
+                <div class="text-sm">
+                    <?= form_submit('submit', 'Add New Book', ['class' => 'bg-[#434C5E] hover:bg-[#81A1C1] text-[#E5E9F0] hover:text-[#434C5E] rounded-md w-full px-5 py-2.5 transition-colors duration-200 border-2 border-black']) ?>
+                </div>
+                <div class="my-8"></div>
+                <?= form_close() ?>
+                <a href="/books" class="self-end text-sm border border-[#434C5E] hover:bg-[#81A1C1] text-[#434C5E] hover:text-[#434C5E] rounded-md px-5 py-2.5 transition-colors duration-200">
+                    Back to Books
+                </a>
             </div>
-            <div class="my-8"></div>
-            <div class="text-sm">
-                <?= form_submit('submit', 'Add New Book', ['class' => 'bg-[#434C5E] hover:bg-[#81A1C1] text-[#E5E9F0] hover:text-[#434C5E] rounded-md w-full px-5 py-2.5 transition-colors duration-200 border-2 border-black']) ?>
-            </div>
-            <div class="my-8"></div>
-            <?= form_close() ?>
-            <a href="/books" class="self-end text-sm border border-[#434C5E] hover:bg-[#81A1C1] text-[#434C5E] hover:text-[#434C5E] rounded-md px-5 py-2.5 transition-colors duration-200">
-                Back to Books
-            </a>
         </div>
     </div>
-</div>
 </div>
 <?= $this->endSection() ?>
