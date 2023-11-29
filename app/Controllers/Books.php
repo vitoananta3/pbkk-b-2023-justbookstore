@@ -260,6 +260,11 @@ class Books extends BaseController
 
     public function delete($id)
     {
+
+        if ($this->booksModel->getBookById($id)['cover'] != 'no-cover.jpg') {
+            unlink('assets/books-cover/' . $this->booksModel->getBookById($id)['cover']);
+        }
+
         $this->booksModel->delete($id);
         session()->setFlashdata('message', 'Book has been deleted.');
         return redirect()->to('/books');
