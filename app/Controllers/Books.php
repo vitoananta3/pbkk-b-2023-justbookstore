@@ -277,7 +277,7 @@ class Books extends BaseController
         // dd($coverFile);
 
         if ($coverFile->getError() == 4) {
-            $coverFile = $this->request->getVar('oldCover');
+            $coverFileName = $this->request->getVar('oldCover');
         } else {
             $editedCoverFile = \Config\Services::image();
             $coverFile->move('assets/books-cover');
