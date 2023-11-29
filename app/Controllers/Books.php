@@ -183,7 +183,7 @@ class Books extends BaseController
         $data = [
             'title' => 'Edit Book | JustBookStore',
             'page' => 'books',
-            'validation' => session('data') ? session('data')['validation'] : \Config\Services::validation(),
+            'validation' => session('validation_errors'),
             'book' => $this->booksModel->getBookBySlug($slug),
             'categories' => $this->categoriesModel->getCategories(),
         ];
@@ -257,12 +257,8 @@ class Books extends BaseController
         ];
 
         if (!$this->validate($rules)) {
-            $data = [
-                'title' => 'Update Book | JustBookStore',
-                'page' => 'books',
-                'validation' => $validation,
-            ];
-            return redirect()->to('/books/edit/' . $this->request->getVar('slug'))->withInput()->with('data', $data);
+            session()->setFlashdata('validation_errors', $validation->getErrors());
+            return redirect()->to('/books/edit/' . $this->request->getVar('slug'))->withInput();
         }
 
         $coverFile = $this->request->getFile('cover');
