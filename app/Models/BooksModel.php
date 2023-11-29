@@ -43,7 +43,12 @@ class BooksModel extends Model
         return $this->findAll();
     }
 
-    public function getBook($slug)
+    public function getBookById($id)
+    {
+        return $this->where(['id' => $id])->first();
+    }
+
+    public function getBookBySlug($slug)
     {
         return $this->where(['slug' => $slug])->first();
     }

@@ -30,8 +30,8 @@
     <?php endif; ?>
     <div class="grid grid-cols-6 grid-flow-row gap-6 max-w-screen-xl mx-auto py-8">
         <?php foreach ($books as $book) : ?>
-            <a href="<?php base_url() ?>books/<?php $slug = $book['slug'];
-                                                echo $slug; ?>" class="bg-[#E5E9F0] rounded-md text-[#434C5E] hover:bg-[#81A1C1] hover:text-[#434C5E] p-2 outline">
+            <a href="<?php base_url() ?>books/<?php $id = $book['id'];
+                                                echo $id; ?>" class="bg-[#E5E9F0] rounded-md text-[#434C5E] hover:bg-[#81A1C1] hover:text-[#434C5E] p-2 outline">
                 <div class="flex flex-col">
                     <img class="card-image" src="<?= base_url(); ?>/assets/images/<?php $path = $book['cover'];
                                                                                     echo $path ?>" alt="">

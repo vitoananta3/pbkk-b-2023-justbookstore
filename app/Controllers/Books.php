@@ -28,12 +28,9 @@ class Books extends BaseController
         return view('books/index', $data);
     }
 
-    public function detail($slug)
+    public function detail($id)
     {
-        $book = $this->booksModel->getBook($slug);
-        if (empty($book)) {
-            throw new \CodeIgniter\Exceptions\PageNotFoundException('Book ' . $slug . ' not found.');
-        }
+        $book = $this->booksModel->getBookById($id);
         $category_id = $book['category_id'];
 
         $data = [
@@ -44,7 +41,7 @@ class Books extends BaseController
         ];
 
         if (empty($data['book'])) {
-            throw new \CodeIgniter\Exceptions\PageNotFoundException('Data Book ' . $slug . ' not found.');
+            throw new \CodeIgniter\Exceptions\PageNotFoundException('Data Book ' . $id . ' not found.');
         }
 
         return view('books/detail', $data);
@@ -114,6 +111,16 @@ class Books extends BaseController
                     'required' => 'Stock is required.',
                     'numeric' => 'Stock must be a number.'
                 ]
+            ],
+            'cover' => [
+                'rules' => 'uploaded[cover]|max_size[cover,1024]|is_image[cover]|mime_in[cover,image/jpg,image/jpeg,image/png]|max_dims[cover,510,784]',
+                'errors' => [
+                    'uploaded' => 'Cover is required.',
+                    'max_size' => 'Cover file size is too big. (max 1MB)',
+                    'is_image' => 'Cover is not an image.',
+                    'mime_in' => 'Cover is not an image.',
+                    'max_dims' => 'Cover dimension is too big. (max 510x784)'
+                ]
             ]
         ];
 
@@ -155,7 +162,7 @@ class Books extends BaseController
             'title' => 'Edit Book | JustBookStore',
             'page' => 'books',
             'validation' => session('data') ? session('data')['validation'] : \Config\Services::validation(),
-            'book' => $this->booksModel->getBook($slug),
+            'book' => $this->booksModel->getBookBySlug($slug),
             'categories' => $this->categoriesModel->getCategories(),
         ];
 
