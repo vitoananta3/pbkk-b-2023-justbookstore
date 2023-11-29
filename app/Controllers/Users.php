@@ -94,4 +94,48 @@ class Users extends BaseController
         session()->setFlashdata('success', 'Sign up successful');
         return redirect()->to('/signin');
     }
+
+    public function signIn() {
+        $validation = \Config\Services::validation();
+
+        $rules = [
+            'email' => [
+                'rules' => 'required|valid_email',
+                'errors' => [
+                    'required' => 'Email is required',
+                    'valid_email' => 'Email is not valid'
+                ]
+            ],
+            'password' => [
+                'rules' => 'required|min_length[8]',
+                'errors' => [
+                    'required' => 'Password is required',
+                    'min_length' => 'Password must be at least 8 characters',
+                ]
+            ]
+        ];
+
+        if (!$this->validate($rules)) {
+            session()->setFlashdata('validation_errors', $validation->getErrors());
+            return redirect()->to('/signin')->withInput();
+        }
+
+        $email = $this->request->getVar('email');
+        $password = $this->request->getVar('password');
+
+        $user = $this->userModel->getUser($email);
+
+        if ($user) {
+            if ($user['password'] == $password) {
+                session()->set('user', $user);
+                return redirect()->to('/books');
+            } else {
+                session()->setFlashdata('error', 'Email or Password is incorrect');
+                return redirect()->to('/signin')->withInput();
+            }
+        } else {
+            session()->setFlashdata('error', 'Email or Password is incorrect');
+            return redirect()->to('/signin')->withInput();
+        }   
+    }
 }
