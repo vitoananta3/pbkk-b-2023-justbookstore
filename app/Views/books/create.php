@@ -16,7 +16,8 @@
                                             if (session('validation_errors') && array_key_exists('title', session('validation_errors')) && session('validation_errors')['title']) {
                                                 echo session('validation_errors')['title'];
                                             }
-                                            ?></div>
+                                            ?>
+                </div>
                 <div class="my-2"></div>
                 <div class="relative">
                     <input type="text" id="floating_outlined" class="border block px-4 pb-3 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-[#434C5E] dark:border-<?= session('validation_errors') && array_key_exists('author', session('validation_errors')) && session('validation_errors')['author'] ? 'red-600' : '[#434C5E]' ?> dark:focus:border-<?= session('validation_errors') && array_key_exists('author', session('validation_errors')) && session('validation_errors')['author'] ? 'red' : 'blue' ?>-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder="..." autofocus name="author" value="<?= old('author'); ?>" />
