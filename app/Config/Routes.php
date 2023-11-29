@@ -23,7 +23,7 @@ $routes->put('/categories/update/(:num)', 'Categories::update/$1');
 $routes->delete('/categories/(:num)', 'Categories::delete/$1');
 $routes->get('/categories/(:segment)', 'Categories::detail/$1');
 
-$routes->get('/signin', 'User::signin');
-$routes->post('/signin', 'User::signin');
-$routes->get('/signup', 'User::signup');
-$routes->post('/signup', 'User::signup');
+$routes->get('/signin', 'Users::signin');
+$routes->post('/signin', 'Users::signin');
+$routes->get('/signup', 'Users::signup');
+$routes->post('/signup', 'Users::signup');

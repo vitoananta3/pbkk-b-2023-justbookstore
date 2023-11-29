@@ -4,7 +4,7 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 
-class User extends BaseController
+class Users extends BaseController
 {
     public function signin()
     {
@@ -12,7 +12,7 @@ class User extends BaseController
             'title' => 'Sign In | JustBookStore',
             'page' => 'sign in'
         ];
-        return view('user/signin', $data);
+        return view('users/signin', $data);
     }
 
     public function signup() 
@@ -21,6 +21,6 @@ class User extends BaseController
             'title' => 'Sign Up | JustBookStore',
             'page' => 'sign up'
         ];
-        return view('user/signup', $data);
+        return view('users/signup', $data);
     }
 }
