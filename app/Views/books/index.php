@@ -5,7 +5,7 @@
     <div class="my-8"></div>
     <div class="mt-8"></div>
     <div class="flex gap-4">
-        <a href="<?=  base_url(); ?>books/create" class="max-w-screen-xl flex gap-2 text-sm bg-[#434C5E] hover:bg-[#81A1C1] text-[#E5E9F0] hover:text-[#434C5E] rounded-md px-3 py-2.5 transition-colors duration-200 border-2 border-black">
+        <a href="<?= base_url(); ?>books/create" class="max-w-screen-xl flex gap-2 text-sm bg-[#434C5E] hover:bg-[#81A1C1] text-[#E5E9F0] hover:text-[#434C5E] rounded-md px-3 py-2.5 transition-colors duration-200 border-2 border-black">
             <div>Add Book</div>
         </a>
     </div>
@@ -32,8 +32,10 @@
         <?php foreach ($books as $book) : ?>
             <a href="<?php base_url() ?>books/<?php $id = $book['id'];
                                                 echo $id; ?>" class="bg-[#E5E9F0] rounded-md text-[#434C5E] hover:bg-[#81A1C1] hover:text-[#434C5E] p-2 outline">
-                <div class="flex flex-col">
-                    <img class="card-image" src="<?= base_url(); ?>assets/books-cover/<?= $book['cover']; ?>" alt="">
+                <div class="flex flex-col justify-between h-full">
+                    <div class="flex">
+                        <img class="card-image" src="<?= base_url(); ?>assets/books-cover/<?= $book['cover']; ?>" alt="">
+                    </div>
                     <div class="flex flex-col pt-2 gap-2">
                         <div class="font-semibold text-sm">
                             <?php
