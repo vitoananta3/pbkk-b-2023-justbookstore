@@ -30,6 +30,17 @@
             }
         }
     </script>
+    <script>
+        const alert = document.getElementById("alert-3");
+        if (alert) {
+            setTimeout(function() {
+                alert.classList.add("hide");
+                setTimeout(function() {
+                    alert.remove();
+                }, 1000);
+            }, 2000);
+        }
+    </script>
 </body>
 
 </html>

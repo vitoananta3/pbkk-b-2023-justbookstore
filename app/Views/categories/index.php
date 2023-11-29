@@ -28,25 +28,20 @@
             </div>
         </div>
     <?php endif; ?>
-    <div class="flex flex-wrap gap-6 max-w-screen-xl mx-auto py-8">
-        <?php foreach ($categories as $category) : ?>
-            <a href="<?php base_url() ?>/categories/<?php $slug = $category['slug'];
-                                                    echo $slug; ?>" class="bg-[#E5E9F0] rounded-md text-[#434C5E] hover:bg-[#81A1C1] hover:text-[#434C5E] p-2 outline">
-                <?= $name = $category['name']; ?>
-            </a>
-        <?php endforeach; ?>
-    </div>
+    <?php if (empty($categories)) : ?>
+        <div class="spa flex flex-col items-center mt-8 text-[#434E5C] text-xl gap-2">
+            <div>There are no categories.</div>
+            <div>Let's create a category by clicking on the Add Category buttom above!</div>
+        </div>
+    <?php else : ?>
+        <div class="flex flex-wrap gap-6 max-w-screen-xl mx-auto py-8">
+            <?php foreach ($categories as $category) : ?>
+                <a href="<?php base_url() ?>/categories/<?php $slug = $category['slug'];
+                                                        echo $slug; ?>" class="bg-[#E5E9F0] rounded-md text-[#434C5E] hover:bg-[#81A1C1] hover:text-[#434C5E] p-2 outline">
+                    <?= $name = $category['name']; ?>
+                </a>
+            <?php endforeach; ?>
+        </div>
+    <?php endif; ?>
 </div>
-
-<script>
-    const alert = document.getElementById("alert-3");
-    if (alert) {
-        setTimeout(function() {
-            alert.classList.add("hide");
-            setTimeout(function() {
-                alert.remove();
-            }, 1000);
-        }, 2000);
-    }
-</script>
 <?= $this->endSection() ?>

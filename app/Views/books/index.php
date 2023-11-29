@@ -28,52 +28,47 @@
             </div>
         </div>
     <?php endif; ?>
-    <div class="grid grid-cols-6 grid-flow-row gap-6 max-w-screen-xl mx-auto py-8">
-        <?php foreach ($books as $book) : ?>
-            <a href="<?php base_url() ?>books/<?php $id = $book['id'];
-                                                echo $id; ?>" class="bg-[#E5E9F0] rounded-md text-[#434C5E] hover:bg-[#81A1C1] hover:text-[#434C5E] p-2 outline">
-                <div class="flex flex-col justify-between h-full">
-                    <div class="flex">
-                        <img class="card-image" src="<?= base_url(); ?>assets/books-cover/<?= $book['cover']; ?>" alt="">
-                    </div>
-                    <div class="flex flex-col pt-2 gap-2">
-                        <div class="font-semibold text-sm">
-                            <?php
-                            $title = $book['title'];
-                            if (strlen($title) > 20) {
-                                echo substr($title, 0, 20) . '...';
-                            } else {
-                                echo $title;
-                            }
-                            ?>
+    <?php if (empty($books)) : ?>
+        <div class="spa flex flex-col items-center mt-8 text-[#434E5C] text-xl gap-4">
+            <div>There are no books.</div>
+            <div>Let's create a book by clicking on the Add Book buttom above!</div>
+        </div>
+    <?php else : ?>
+        <div class="grid grid-cols-6 grid-flow-row gap-6 max-w-screen-xl mx-auto py-8">
+            <?php foreach ($books as $book) : ?>
+                <a href="<?php base_url() ?>books/<?php $id = $book['id'];
+                                                    echo $id; ?>" class="bg-[#E5E9F0] rounded-md text-[#434C5E] hover:bg-[#81A1C1] hover:text-[#434C5E] p-2 outline">
+                    <div class="flex flex-col justify-between h-full">
+                        <div class="flex">
+                            <img class="card-image" src="<?= base_url(); ?>assets/books-cover/<?= $book['cover']; ?>" alt="">
                         </div>
-                        <div class="font-light text-sm">
-                            <?php
-                            $author = $book['author'];
-                            if (strlen($author) > 20) {
-                                echo substr($author, 0, 20) . '...';
-                            } else {
-                                echo $author;
-                            }
-                            ?>
+                        <div class="flex flex-col pt-2 gap-2">
+                            <div class="font-semibold text-sm">
+                                <?php
+                                $title = $book['title'];
+                                if (strlen($title) > 20) {
+                                    echo substr($title, 0, 20) . '...';
+                                } else {
+                                    echo $title;
+                                }
+                                ?>
+                            </div>
+                            <div class="font-light text-sm">
+                                <?php
+                                $author = $book['author'];
+                                if (strlen($author) > 20) {
+                                    echo substr($author, 0, 20) . '...';
+                                } else {
+                                    echo $author;
+                                }
+                                ?>
+                            </div>
+                            <span class="font-bold text-sm">Rp<?= $book['price']; ?></span>
                         </div>
-                        <span class="font-bold text-sm">Rp<?= $book['price']; ?></span>
                     </div>
-                </div>
-            </a>
-        <?php endforeach; ?>
-    </div>
+                </a>
+            <?php endforeach; ?>
+        </div>
+    <?php endif; ?>
 </div>
-
-<script>
-    const alert = document.getElementById("alert-3");
-    if (alert) {
-        setTimeout(function() {
-            alert.classList.add("hide");
-            setTimeout(function() {
-                alert.remove();
-            }, 1000);
-        }, 2000);
-    }
-</script>
 <?= $this->endSection() ?>

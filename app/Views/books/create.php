@@ -54,6 +54,7 @@
                         <option value="<?= $category['id'] ?>"><?= $category['name'] ?></option>
                     <?php endforeach; ?>
                 </select>
+                <span class="text-sm font-thin text-[#434E5C]">(Create one if there are no categories)</span>
                 <div class="text-red-600"><?php
                                             if (session('validation_errors') && array_key_exists('category_id', session('validation_errors')) && session('validation_errors')['category_id']) {
                                                 echo session('validation_errors')['category_id'];
@@ -83,7 +84,7 @@
                 <label class="block text-[#434C5E] dark:[#434C5E]" for="cover" id="cover-label">Cover</label>
                 <img class="card-image-preview img-thumbnail img-preview" src="<?= base_url(); ?>assets/books-cover/no-cover.jpg" alt="preview-book-cover">
                 <input onchange="previewImg()" id="cover" name="cover" class="block w-full text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-[#434C5E] focus:outline-none dark:bg-[#E5E9F0] dark:border-<?= session('validation_errors') && array_key_exists('cover', session('validation_errors')) && session('validation_errors')['cover'] ? 'red-600' : '[#434C5E]' ?> dark:placeholder-<?= session('validation_errors') && array_key_exists('cover', session('validation_errors')) && session('validation_errors')['cover'] ? 'red-600' : '[#434C5E]' ?>" id="cover" type="file">
-                <p class="mt-1 text-<?= session('validation_errors') && array_key_exists('cover', session('validation_errors')) && session('validation_errors')['cover'] ? 'red-600' : '[#434C5E]' ?> font-thin">.jpg, .jpeg or .png | max size 1MB | max dimension 510px X 784px.</p>
+                <p class="mt-1 text-<?= session('validation_errors') && array_key_exists('cover', session('validation_errors')) && session('validation_errors')['cover'] ? 'red-600' : '[#434C5E]' ?> font-thin">(.jpg, .jpeg or .png | max size 1MB | max dimension 510px X 784px)</p>
                 <div class="text-red-600"><?php
                                             if (session('validation_errors') && array_key_exists('cover', session('validation_errors')) && session('validation_errors')['cover']) {
                                                 echo session('validation_errors')['cover'];
