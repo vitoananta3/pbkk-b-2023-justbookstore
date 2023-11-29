@@ -261,15 +261,46 @@ class Books extends BaseController
             return redirect()->to('/books/edit/' . $this->request->getVar('slug'))->withInput();
         }
 
+        // $coverFile = $this->request->getFile('cover');
+
+        // if ($coverFile->getError() == 4) {
+        //     $coverFileName = $this->request->getVar('oldCover');
+        // } else {
+        //     $coverFile->move('assets/books-cover');
+        //     $coverFile = $coverFile->getName();
+        //     if ($this->request->getVar('oldCover') != 'no-cover.jpg') {
+        //         unlink('assets/books-cover/' . $this->request->getVar('oldCover'));
+        //     }
+        // }
+
         $coverFile = $this->request->getFile('cover');
+        // dd($coverFile);
 
         if ($coverFile->getError() == 4) {
             $coverFile = $this->request->getVar('oldCover');
         } else {
+            $editedCoverFile = \Config\Services::image();
             $coverFile->move('assets/books-cover');
-            $coverFile = $coverFile->getName();
-            if ($this->request->getVar('oldCover') != 'no-cover.jpg') {
-                unlink('assets/books-cover/' . $this->request->getVar('oldCover'));
+
+            $imageSize = getimagesize('assets/books-cover/' . $coverFile->getName());
+            $width = $imageSize[0]; // Get width
+            $height = $imageSize[1]; // Get height
+
+            if (($width > 255 || $width < 255) || ($height > 392 || $height < 392)) {
+                // Resize and fit the image to 255x392
+                $editedCoverFile->withFile('assets/books-cover/' . $coverFile->getName())
+                    ->fit(255, 392, 'center')
+                    ->save('assets/books-cover/' . $coverFile->getName());
+                $coverFileName = $coverFile->getName();
+                if ($this->request->getVar('oldCover') != 'no-cover.jpg') {
+                    unlink('assets/books-cover/' . $this->request->getVar('oldCover'));
+                }
+            } else {
+                // If image is within the desired dimensions, use the original file
+                $coverFileName = $coverFile->getName();
+                if ($this->request->getVar('oldCover') != 'no-cover.jpg') {
+                    unlink('assets/books-cover/' . $this->request->getVar('oldCover'));
+                }
             }
         }
 
@@ -283,7 +314,7 @@ class Books extends BaseController
             'category_id' => $this->request->getVar('category_id'),
             'price' => $this->request->getVar('price'),
             'stock' => $this->request->getVar('stock'),
-            'cover' => $coverFile
+            'cover' => $coverFileName
         ]);
 
         session()->setFlashdata('message', 'Book has been edited.');
