@@ -136,8 +136,23 @@ class Books extends BaseController
         if ($coverFile->getError() == 4) {
             $coverFileName = 'no-cover.jpg';
         } else {
+            $editedCoverFile = \Config\Services::image();
             $coverFile->move('assets/books-cover');
-            $coverFileName = $coverFile->getName();
+
+            $imageSize = getimagesize('assets/books-cover/' . $coverFile->getName());
+            $width = $imageSize[0]; // Get width
+            $height = $imageSize[1]; // Get height
+
+            if (($width > 255 || $width < 255) || ($height > 392 || $height < 392)) {
+                // Resize and fit the image to 255x392
+                $editedCoverFile->withFile('assets/books-cover/' . $coverFile->getName())
+                    ->fit(255, 392, 'center')
+                    ->save('assets/books-cover/' . $coverFile->getName());
+                $coverFileName = $coverFile->getName();
+            } else {
+                // If image is within the desired dimensions, use the original file
+                $coverFileName = $coverFile->getName();
+            }
         }
 
         // $noCover = 'no-cover.jpg';
