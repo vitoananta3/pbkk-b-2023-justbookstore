@@ -12,6 +12,12 @@
     /* object-position: center; */
 }
 
+.card-image-preview {
+    width: 10%;
+    object-fit: cover;
+    object-position: center;
+}
+
 .spa {
     height: calc(100vh - 4rem);
 }
