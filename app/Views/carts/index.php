@@ -45,28 +45,25 @@
                             <div class="justify-between mb-6 rounded-lg bg-white p-6 shadow-md sm:flex sm:justify-start">
                                 <img src="<?= base_url(); ?>assets/books-cover/<?= $book['cover']; ?>" alt="product-image" class="w-full sm:w-40" />
                                 <div class="sm:ml-4 sm:flex sm:w-full sm:justify-between">
-                                    <div class="mt-5 sm:mt-0">
+                                    <div class="mt-5 sm:mt-0 w-2/3">
                                         <h2 class="text-lg font-bold text-gray-900"><?= $book['title']; ?></h2>
-                                        <h2 class="mt-4 text-base font-bold text-gray-900">Rp<?= $book['price']; ?> (@1)</h2>
+                                        <h2 class="mt-4 text-base font-semibold text-gray-900">Rp<?= $book['price']; ?> (@1)</h2>
                                         <p class="mt-4 text-xs text-gray-700"><?= $book['author']; ?></p>
                                         <p class="mt-4 text-xs text-gray-700"><?= $book['publisher']; ?></p>
                                         <p class="mt-4 text-xs text-gray-700"><?= $book['synopsis']; ?></p>
                                     </div>
-                                    <div class="mt-4 flex justify-between sm:space-y-6 sm:mt-0 sm:block sm:space-x-6">
+                                    <div class="mt-4 flex justify-between sm:space-y-6 sm:mt-0 sm:block w/1-3 flex-col gap-4">
                                         <div class="flex items-center border-gray-100">
-                                            <span class="cursor-pointer rounded-l bg-gray-100 py-1 px-3.5 duration-100 hover:bg-blue-500 hover:text-blue-50"> - </span>
-                                            <input class="h-8 w-8 border bg-white text-center text-xs outline-none" type="number" value="<?= $item['quantity']; ?>" min="1" />
-                                            <span class="cursor-pointer rounded-r bg-gray-100 py-1 px-3 duration-100 hover:bg-blue-500 hover:text-blue-50"> + </span>
+                                            <span class="cursor-pointer rounded-l bg-[#434C5E] py-1 px-3.5 duration-100 hover:bg-[#81A1C1] text-[#E5E9F0] hover:text-[#434C5E]"> - </span>
+                                            <input class="h-8 border bg-white text-center text-xs outline-none px-4 w-full" type="number" value="<?= $item['quantity']; ?>" min="1" />
+                                            <span class="cursor-pointer rounded-r bg-[#434C5E] py-1 px-3 duration-100 hover:bg-[#81A1C1] text-[#E5E9F0] hover:text-[#434C5E]"> + </span>
                                         </div>
-                                        <div class="flex items-center space-x-4">
+                                        <div class="flex items-center">
                                             <?php
                                             $totalPrice = $book['price'] * $item['quantity'];
                                             $formattedPrice = number_format($totalPrice, 0, ',', '.');
                                             ?>
-                                            <p class="text-sm total-price">Rp<?= $formattedPrice; ?></p>
-                                            <!-- <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-5 w-5 cursor-pointer duration-150 hover:text-red-500">
-                                                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-                                            </svg> -->
+                                            <p class="text-sm font-semibold">Subtotal Rp<?= $formattedPrice; ?></p>
                                         </div>
                                     </div>
                                 </div>
@@ -89,7 +86,7 @@
                     ?>
                     <p class="mb-1 text-lg font-bold">Rp<?= $formattedCartTotal; ?></p>
                 </div>
-                <button class="mt-6 w-full rounded-md bg-blue-500 py-1.5 font-medium text-blue-50 hover:bg-blue-600">Check out</button>
+                <button class="bg-[#434C5E] hover:bg-[#81A1C1] text-[#E5E9F0] hover:text-[#434C5E] rounded-md px-3 py-2.5 transition-colors duration-200 border-2 border-black w-full mt-8">Check out</button>
             </div>
         </div>
     <?php endif; ?>
