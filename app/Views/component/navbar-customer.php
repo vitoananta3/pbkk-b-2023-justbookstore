@@ -48,33 +48,21 @@
     </div>
     <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-user">
       <ul class="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-[#434C5E] dark:border-gray-700">
-        <?php if (session()->has('user')) : ?>
-          <li>
-            <a href="<?= base_url() ?>" class="block py-2 px-3 text-[#E5E9F0] rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-[#81A1C1] md:p-0 dark:text-white md:dark:hover:text-[#81A1C1] dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent <?php echo $page === 'home' ? 'active-nav-item' : ''; ?>">Home</a>
-          </li>
-          <li>
-            <a href="<?= base_url() ?>categories" class="block py-2 px-3 text-[#E5E9F0] rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-[#81A1C1] md:p-0 dark:text-white md:dark:hover:text-[#81A1C1] dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent <?php echo $page === 'categories' ? 'active-nav-item' : ''; ?>">Categories</a>
-          </li>
-          <li>
-            <a href="<?= base_url() ?>books" class="block py-2 px-3 text-[#E5E9F0] rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-[#81A1C1] md:p-0 dark:text-white md:dark:hover:text-[#81A1C1] dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent <?php echo $page === 'books' ? 'active-nav-item' : ''; ?>">Books</a>
-          </li>
-          <li>
-            <a href="<?= base_url() ?>carts" class="block py-2 px-3 text-[#E5E9F0] rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-[#81A1C1] md:p-0 dark:text-white md:dark:hover:text-[#81A1C1] dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent <?php echo $page === 'carts' ? 'active-nav-item' : ''; ?>">Carts</a>
-          </li>
-          <li>
-            <a href="<?= base_url() ?>transactions" class="block py-2 px-3 text-[#E5E9F0] rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-[#81A1C1] md:p-0 dark:text-white md:dark:hover:text-[#81A1C1] dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent <?php echo $page === 'transactions' ? 'active-nav-item' : ''; ?>">Transactions</a>
-          </li>
-        <?php else : ?>
-          <li>
-            <a href="<?= base_url() ?>" class="block py-2 px-3 text-[#E5E9F0] rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-[#81A1C1] md:p-0 dark:text-white md:dark:hover:text-[#81A1C1] dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent <?php echo $page === 'home' ? 'active-nav-item' : ''; ?>">Home</a>
-          </li>
-          <li>
-            <a href="<?= base_url() ?>categories" class="block py-2 px-3 text-[#E5E9F0] rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-[#81A1C1] md:p-0 dark:text-white md:dark:hover:text-[#81A1C1] dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent <?php echo $page === 'categories' ? 'active-nav-item' : ''; ?>">Categories</a>
-          </li>
-          <li>
-            <a href="<?= base_url() ?>books" class="block py-2 px-3 text-[#E5E9F0] rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-[#81A1C1] md:p-0 dark:text-white md:dark:hover:text-[#81A1C1] dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent <?php echo $page === 'books' ? 'active-nav-item' : ''; ?>">Books</a>
-          </li>
-        <?php endif; ?>
+        <li>
+          <a href="<?= base_url() ?>" class="block py-2 px-3 text-[#E5E9F0] rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-[#81A1C1] md:p-0 dark:text-white md:dark:hover:text-[#81A1C1] dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent <?php echo $page === 'home' ? 'active-nav-item' : ''; ?>">Home</a>
+        </li>
+        <li>
+          <a href="<?= base_url() ?>categories" class="block py-2 px-3 text-[#E5E9F0] rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-[#81A1C1] md:p-0 dark:text-white md:dark:hover:text-[#81A1C1] dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent <?php echo $page === 'categories' ? 'active-nav-item' : ''; ?>">Categories</a>
+        </li>
+        <li>
+          <a href="<?= base_url() ?>books" class="block py-2 px-3 text-[#E5E9F0] rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-[#81A1C1] md:p-0 dark:text-white md:dark:hover:text-[#81A1C1] dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent <?php echo $page === 'books' ? 'active-nav-item' : ''; ?>">Books</a>
+        </li>
+        <li>
+          <a href="<?= base_url() ?>carts" class="block py-2 px-3 text-[#E5E9F0] rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-[#81A1C1] md:p-0 dark:text-white md:dark:hover:text-[#81A1C1] dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent <?php echo $page === 'carts' ? 'active-nav-item' : ''; ?>">Carts</a>
+        </li>
+        <li>
+          <a href="<?= base_url() ?>transactions" class="block py-2 px-3 text-[#E5E9F0] rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-[#81A1C1] md:p-0 dark:text-white md:dark:hover:text-[#81A1C1] dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent <?php echo $page === 'transactions' ? 'active-nav-item' : ''; ?>">Transactions</a>
+        </li>
       </ul>
     </div>
   </div>

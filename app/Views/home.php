@@ -1,7 +1,16 @@
 <!-- <?php $this->setVar('pageTitle', "- Home"); ?> -->
 <?= $this->extend('layout\template') ?>
 <?= $this->section('content') ?>
-<?= $this->include('component/navbar') ?>
+<?php if (session()->has('user')) : ?>
+    <?php $user = session()->get('user'); ?>
+    <?php if ($user['isAdmin'] == '1') : ?> <!-- Opening curly brace added for the if statement -->
+        <?= $this->include('component/navbar-admin-guest') ?>
+    <?php else : ?>
+        <?= $this->include('component/navbar-customer') ?>
+    <?php endif; ?>
+<?php else : ?>
+    <?= $this->include('component/navbar-admin-guest') ?>
+<?php endif; ?>
 <div class="flex flex-col items-center h-screen bg-[#E5E9F0]">
     <div class="my-8"></div>
     <p class="text-5xl font-extrabold py-28 text-[#434C5E] max-w-screen-xl mx-auto">JustBookStore</p>

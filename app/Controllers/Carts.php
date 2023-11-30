@@ -21,7 +21,7 @@ class Carts extends BaseController
     public function index()
     {
         $user = session()->get('user');
-        if (!$user) {
+        if (!$user || $user['isAdmin'] == '1') {
             return redirect()->to('/signin');
         }
 
@@ -70,7 +70,7 @@ class Carts extends BaseController
     public function transactionsIndex()
     {
         $user = session()->get('user');
-        if (!$user) {
+        if (!$user || $user['isAdmin'] == '1') {
             return redirect()->to('/signin');
         }
 
@@ -90,7 +90,7 @@ class Carts extends BaseController
     public function checkout()
     {
         $user = session()->get('user');
-        if (!$user) {
+        if (!$user || $user['isAdmin'] == '1') {
             return redirect()->to('/signin');
         }
 
@@ -111,7 +111,7 @@ class Carts extends BaseController
 
     public function detail($id) {
         $user = session()->get('user');
-        if (!$user) {
+        if (!$user || $user['isAdmin'] == '1') {
             return redirect()->to('/signin');
         }
 

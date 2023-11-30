@@ -1,6 +1,15 @@
 <?= $this->extend('layout\template') ?>
 <?= $this->section('content') ?>
-<?= $this->include('component/navbar') ?>
+<?php if (session()->has('user')) : ?>
+    <?php $user = session()->get('user'); ?>
+    <?php if ($user['isAdmin'] == '1') : ?> <!-- Opening curly brace added for the if statement -->
+        <?= $this->include('component/navbar-admin-guest') ?>
+    <?php else : ?>
+        <?= $this->include('component/navbar-customer') ?>
+    <?php endif; ?>
+<?php else : ?>
+    <?= $this->include('component/navbar-admin-guest') ?>
+<?php endif; ?>
 <div class="flex flex-col items-center bg-[#E5E9F0]">
     <div class="my-8"></div>
     <div class="mt-8"></div>
