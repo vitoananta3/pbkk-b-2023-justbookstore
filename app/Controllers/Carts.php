@@ -54,18 +54,29 @@ class Carts extends BaseController
         $cart_id = $cart['id'];
 
         $cartItems = $this->cartItemModel->getItems($cart_id);
-        
+
         $itemIds = $this->cartItemModel->getItemsId($cart_id);
 
-        $books = $this->booksModel->getBooksByIds($itemIds);
+        if (!$itemIds) {
+            $data = [
+                'title' => 'Carts | JustBookStore',
+                'page' => 'carts',
+                'cart' => $cart,
+                'cartItems' => $cartItems,
+                'books' => []
+            ];
+            return view('carts/index', $data);
+        } else {
+            $books = $this->booksModel->getBooksByIds($itemIds);
 
-        $data = [
-            'title' => 'Carts | JustBookStore',
-            'page' => 'carts',
-            'cart' => $cart,
-            'cartItems' => $cartItems,
-            'books' => $books
-        ];
-        return view('carts/index', $data);
+            $data = [
+                'title' => 'Carts | JustBookStore',
+                'page' => 'carts',
+                'cart' => $cart,
+                'cartItems' => $cartItems,
+                'books' => $books
+            ];
+            return view('carts/index', $data);
+        }
     }
 }

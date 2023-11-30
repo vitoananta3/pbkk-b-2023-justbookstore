@@ -36,7 +36,7 @@ class CartItems extends BaseController
                 'quantity' => $this->request->getVar('quantity')
             ]);
 
-            session()->setFlashdata('success', 'Item added to cart');
+            session()->setFlashdata('message', 'Item added to cart');
             return redirect()->to('/carts');
         } else {
 
@@ -48,7 +48,7 @@ class CartItems extends BaseController
                     'quantity' => $isItemExist['quantity'] + $this->request->getVar('quantity')
                 ]);
 
-                session()->setFlashdata('success', 'Item added to cart');
+                session()->setFlashdata('message', 'Item added to cart');
                 return redirect()->to('/carts');
             } else {
                 $this->cartItemModel->save([
@@ -57,17 +57,17 @@ class CartItems extends BaseController
                     'quantity' => $this->request->getVar('quantity')
                 ]);
 
-                session()->setFlashdata('success', 'Item added to cart');
+                session()->setFlashdata('message', 'Item added to cart');
                 return redirect()->to('/carts');
             }
         }
     }
-    
+
     public function deleteItem($id)
     {
         $this->cartItemModel->delete($id);
 
-        session()->setFlashdata('success', 'Item deleted from cart');
+        session()->setFlashdata('message', 'Item deleted from cart');
         return redirect()->to('/carts');
     }
 }
