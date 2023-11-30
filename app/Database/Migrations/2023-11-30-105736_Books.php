@@ -37,7 +37,7 @@ class Books extends Migration
             ],
             'price' => [
                 'type'              => 'DECIMAL',
-                'constraint'        => 10,0
+                'constraint'        => 10, 0
             ],
             'stock' => [
                 'type'              => 'INT',
@@ -47,12 +47,28 @@ class Books extends Migration
                 'type'              => 'VARCHAR',
                 'constraint'        => 255
             ],
-            
+            'category_id' => [
+                'type'              => 'INT',
+                'constraint'        => 11,
+                'unsigned'          => true
+            ],
+            'created_at' => [
+                'type'              => 'DATETIME',
+                'null'              => true
+            ],
+            'updated_at' => [
+                'type'              => 'DATETIME',
+                'null'              => true
+            ],
         ]);
+
+        $this->forge->addKey('id', true);
+        $this->forge->addForeignKey('category_id', 'categories', 'id', 'CASCADE', 'CASCADE');
+        $this->forge->createTable('books');
     }
 
     public function down()
     {
-        //
+        $this->forge->dropTable('books');
     }
 }

@@ -4,7 +4,7 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class Categories extends Migration
+class Users extends Migration
 {
     public function up()
     {
@@ -15,13 +15,25 @@ class Categories extends Migration
                 'unsigned'          => true,
                 'auto_increment'    => true
             ],
-            'name' => [
+            'firstName' => [
                 'type'              => 'VARCHAR',
                 'constraint'        => 255
             ],
-            'slug' => [
+            'lastName' => [
                 'type'              => 'VARCHAR',
                 'constraint'        => 255
+            ],
+            'email' => [
+                'type'              => 'VARCHAR',
+                'constraint'        => 255
+            ],
+            'password' => [
+                'type'              => 'VARCHAR',
+                'constraint'        => 255
+            ],
+            'isAdmin' => [
+                'type'              => 'INT',
+                'constraint'        => 11
             ],
             'created_at' => [
                 'type'              => 'DATETIME',
@@ -34,11 +46,11 @@ class Categories extends Migration
         ]);
 
         $this->forge->addKey('id', true);
-        $this->forge->createTable('categories');
+        $this->forge->createTable('users');
     }
 
     public function down()
     {
-        $this->forge->dropTable('categories');
+        $this->forge->dropTable('users');
     }
 }
