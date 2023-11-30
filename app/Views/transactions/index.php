@@ -30,7 +30,7 @@
             </a>
         </div>
         <div class="spa flex flex-col items-center mt-8 text-[#434E5C] text-xl gap-4">
-            <div>There are no items in your cart.</div>
+            <div>There are no transactions yet</div>
             <div>Let's shop a book by clicking on the Shop Now above</div>
         </div>
     <?php else : ?>
@@ -43,7 +43,7 @@
                         </a>
                     </div>
                     <div class="flex flex-col items-center text-[#434E5C] text-xl gap-2 mt-4">
-                        <div>There are no items in your cart</div>
+                        <div>There are no transactions yet</div>
                         <div>Let's shop a book by clicking on the Shop Now above</div>
                     </div>
                 <?php else : ?>
@@ -59,9 +59,8 @@
                     <div class="justify-between mb-6 rounded-lg bg-white p-6 shadow-md sm:flex sm:justify-start">
                         <div class="sm:ml-4 sm:flex sm:justify-between gap-8 w-full">
                             <div class="mt-5 sm:mt-0 flex flex-col gap-4 justify-center w-2/3">
-                                <div class="flex flex-col gap-4">
-                                    <h1 class="text-lg font-bold text-gray-900">Transaction <?= $transactionCounter; ?></h1>
-                                    <h2 class="text-gray-900">at <?= $cart['updated_at']; ?></h2>
+                                <div class="flex flex-col">
+                                    <div><span class="text-lg font-bold text-gray-900">Transaction <?= $transactionCounter; ?></span> at <?= $cart['updated_at']; ?></div>
                                 </div>
                             </div>
                             <div class="mt-4 flex sm:space-y-6 sm:mt-0 sm:block flex-col gap-4 h-full w-1/3">
