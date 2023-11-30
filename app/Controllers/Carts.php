@@ -9,11 +9,13 @@ class Carts extends BaseController
 
     protected $cartsModel;
     protected $cartItemModel;
+    protected $booksModel;
 
     public function __construct()
     {
         $this->cartsModel = new \App\Models\CartModel();
         $this->cartItemModel = new \App\Models\CartItemModel();
+        $this->booksModel = new \App\Models\BooksModel();
     }
 
     public function index()
@@ -49,33 +51,21 @@ class Carts extends BaseController
 
         $cart = $this->cartsModel->getActiveCart($user['id']);
 
-        if (!$cart) {
-            $data = [
-                'title' => 'Carts | JustBookStore',
-                'page' => 'carts',
-            ];
-            return view('carts/index', $data);
-        } else {
-            $cart_id = $cart['id'];
+        $cart_id = $cart['id'];
 
-            $cartItems = $this->cartItemModel->getItems($cart_id);
+        $cartItems = $this->cartItemModel->getItems($cart_id);
+        
+        $itemIds = $this->cartItemModel->getItemsId($cart_id);
 
-            $data = [
-                'title' => 'Carts | JustBookStore',
-                'page' => 'carts',
-                'cart' => $cart,
-                'cartItems' => $cartItems
-            ];
-            return view('carts/index', $data);
-        }
+        $books = $this->booksModel->getBooksByIds($itemIds);
 
-        // $data = [
-        //     'title' => 'Carts | JustBookStore',
-        //     'page' => 'carts',
-        //     'cart' => $cart,
-        //     'cartItems' => $cart_items
-        // ];
-
-        // return view('carts/index', $data);
+        $data = [
+            'title' => 'Carts | JustBookStore',
+            'page' => 'carts',
+            'cart' => $cart,
+            'cartItems' => $cartItems,
+            'books' => $books
+        ];
+        return view('carts/index', $data);
     }
 }

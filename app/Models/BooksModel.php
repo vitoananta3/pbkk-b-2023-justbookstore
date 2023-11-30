@@ -52,4 +52,9 @@ class BooksModel extends Model
     {
         return $this->where(['slug' => $slug])->first();
     }
+
+    public function getBooksByIds($ids)
+    {
+        return $this->whereIn('id', $ids)->findAll();
+    }
 }

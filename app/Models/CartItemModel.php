@@ -22,4 +22,12 @@ class CartItemModel extends Model
     {
         return $this->where(['cart_id' => $cartId])->where(['book_id' => $bookId])->first();
     }
+
+    public function getItemsId($cartId)
+    {
+        $items = $this->where(['cart_id' => $cartId])->findAll();
+        $itemsId = array_column($items, 'book_id');
+
+        return $itemsId;
+    }
 }

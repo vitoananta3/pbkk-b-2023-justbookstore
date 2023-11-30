@@ -31,7 +31,7 @@
     <?php if (empty($categories)) : ?>
         <div class="spa flex flex-col items-center mt-8 text-[#434E5C] text-xl gap-2">
             <div>There are no categories.</div>
-            <div>Let's create a category by clicking on the Add Category buttom above!</div>
+            <div>Let's create a category by clicking on the Add Category button above!</div>
         </div>
     <?php else : ?>
         <div class="flex flex-wrap gap-6 max-w-screen-xl mx-auto py-8">

@@ -31,7 +31,7 @@
     <?php if (empty($books)) : ?>
         <div class="spa flex flex-col items-center mt-8 text-[#434E5C] text-xl gap-4">
             <div>There are no books.</div>
-            <div>Let's create a book by clicking on the Add Book buttom above!</div>
+            <div>Let's create a book by clicking on the Add Book button above!</div>
         </div>
     <?php else : ?>
         <div class="grid grid-cols-6 grid-flow-row gap-6 max-w-screen-xl mx-auto py-8">
