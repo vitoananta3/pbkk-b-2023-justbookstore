@@ -15,12 +15,15 @@
     <div class="mt-8"></div>
     <?php if (session()->has('user')) : ?>
         <?php $user = session()->get('user'); ?>
-        <?php if ($user['isAdmin'] == '1') ?>
-        <div class="flex gap-4">
-            <a href="<?= base_url(); ?>books/create" class="max-w-screen-xl flex gap-2 text-sm bg-[#434C5E] hover:bg-[#81A1C1] text-[#E5E9F0] hover:text-[#434C5E] rounded-md px-3 py-2.5 transition-colors duration-200 border-2 border-black">
-                <div>Add Book</div>
-            </a>
-        </div>
+        <?php if ($user['isAdmin'] == '1') : ?> <!-- Opening curly brace added for the if statement -->
+            <div class="flex gap-4">
+                <a href="<?= base_url(); ?>books/create" class="max-w-screen-xl flex gap-2 text-sm bg-[#434C5E] hover:bg-[#81A1C1] text-[#E5E9F0] hover:text-[#434C5E] rounded-md px-3 py-2.5 transition-colors duration-200 border-2 border-black">
+                    <div>Add Book</div>
+                </a>
+            </div>
+        <?php else : ?>
+        <?php endif; ?>
+    <?php else : ?>
     <?php endif; ?>
     <?php if (session()->getFlashdata('message')) : ?>
         <div class="fixed top-0 mt-20 right-0 mr-8 z-30">
@@ -46,8 +49,11 @@
             <div>There are no books</div>
             <?php if (session()->has('user')) : ?>
                 <?php $user = session()->get('user'); ?>
-                <?php if ($user['isAdmin'] == '1') ?>
-                <div>Let's create a book by clicking on the Add Book button above!</div>
+                <?php if ($user['isAdmin'] == '1') : ?> <!-- Opening curly brace added for the if statement -->
+                    <div>Let's create a book by clicking on the Add Book button above!</div>
+                <?php else : ?>
+                <?php endif; ?>
+            <?php else : ?>
             <?php endif; ?>
         </div>
     <?php else : ?>
