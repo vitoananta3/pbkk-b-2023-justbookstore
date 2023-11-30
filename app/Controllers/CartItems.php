@@ -62,4 +62,12 @@ class CartItems extends BaseController
             }
         }
     }
+    
+    public function deleteItem($id)
+    {
+        $this->cartItemModel->delete($id);
+
+        session()->setFlashdata('success', 'Item deleted from cart');
+        return redirect()->to('/carts');
+    }
 }
