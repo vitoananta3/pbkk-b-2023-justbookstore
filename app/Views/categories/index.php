@@ -4,11 +4,15 @@
 <div class="flex flex-col items-center h-screen bg-[#E5E9F0]">
     <div class="my-8"></div>
     <div class="mt-8"></div>
-    <div class="flex gap-4">
-        <a href="/categories/create" class="max-w-screen-xl flex gap-2 text-sm bg-[#434C5E] hover:bg-[#81A1C1] text-[#E5E9F0] hover:text-[#434C5E] rounded-md px-3 py-2.5 transition-colors duration-200 border-2 border-black">
-            <div>Add Category</div>
-        </a>
-    </div>
+    <?php if (session()->has('user')) : ?>
+        <?php $user = session()->get('user'); ?>
+        <?php if ($user['isAdmin'] == '1') ?>
+        <div class="flex gap-4">
+            <a href="/categories/create" class="max-w-screen-xl flex gap-2 text-sm bg-[#434C5E] hover:bg-[#81A1C1] text-[#E5E9F0] hover:text-[#434C5E] rounded-md px-3 py-2.5 transition-colors duration-200 border-2 border-black">
+                <div>Add Category</div>
+            </a>
+        </div>
+    <?php endif; ?>
     <?php if (session()->getFlashdata('message')) : ?>
         <div class="fixed top-0 mt-20 right-0 mr-8 z-30">
             <div id="alert-3" class="fade-out flex items-center p-4 text-green-800 rounded-lg bg-[#E5E9F0] dark:bg-[#434C5E] dark:text-green-400 gap-2" role="alert">
@@ -30,16 +34,28 @@
     <?php endif; ?>
     <?php if (empty($categories)) : ?>
         <div class="spa flex flex-col items-center mt-8 text-[#434E5C] text-xl gap-2">
-            <div>There are no categories.</div>
-            <div>Let's create a category by clicking on the Add Category button above!</div>
+            <div>There are no categories</div>
+            <?php if (session()->has('user')) : ?>
+                <?php $user = session()->get('user'); ?>
+                <?php if ($user['isAdmin'] == '1') ?>
+                <div>Let's create a category by clicking on the Add Category button above!</div>
+            <?php endif; ?>
         </div>
     <?php else : ?>
         <div class="flex flex-wrap gap-6 max-w-screen-xl mx-auto py-8">
             <?php foreach ($categories as $category) : ?>
-                <a href="<?php base_url() ?>/categories/<?php $slug = $category['slug'];
-                                                        echo $slug; ?>" class="bg-[#E5E9F0] rounded-md text-[#434C5E] hover:bg-[#81A1C1] hover:text-[#434C5E] p-2 outline">
-                    <?= $name = $category['name']; ?>
-                </a>
+                <?php if (session()->has('user')) : ?>
+                    <?php $user = session()->get('user'); ?>
+                    <?php if ($user['isAdmin'] == '1') ?>
+                    <a href="<?php base_url() ?>/categories/<?php $slug = $category['slug'];
+                                                            echo $slug; ?>" class="bg-[#E5E9F0] rounded-md text-[#434C5E] hover:bg-[#81A1C1] hover:text-[#434C5E] p-2 outline">
+                        <?= $name = $category['name']; ?>
+                    </a>
+                <?php else : ?>
+                    <div class="bg-[#E5E9F0] rounded-md text-[#434C5E] hover:bg-[#81A1C1] hover:text-[#434C5E] p-2 outline">
+                        <?= $name = $category['name']; ?>
+                    </div>
+                <?php endif; ?>
             <?php endforeach; ?>
         </div>
     <?php endif; ?>
