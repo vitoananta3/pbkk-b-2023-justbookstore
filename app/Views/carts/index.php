@@ -60,7 +60,7 @@
                                         <img src="<?= base_url(); ?>assets/books-cover/<?= $book['cover']; ?>" alt="product-image" class="w-full" />
                                     </a>
                                 </div>
-                                <div class="sm:ml-4 sm:flex sm:justify-between gap-8 w-full">
+                                <div class="sm:ml-4 sm:flex sm:justify-between gap-8 w-4/5">
                                     <div class="mt-5 sm:mt-0 flex flex-col gap-4 justify-between w-2/3">
                                         <div class="flex flex-col gap-4">
                                             <h2 class="text-lg font-bold text-gray-900"><?= $book['title']; ?></h2>
@@ -148,6 +148,7 @@
             <!-- Sub total -->
             <div class="mt-6 h-full rounded-lg border bg-white p-6 shadow-md md:mt-0 md:w-1/3">
                 <p class="text-lg font-bold mb-4">Cart Summary</p>
+                <hr class="mb-4">
                 <div class="flex justify-between">
                     <p class="text-lg font-bold">Total</p>
                     <?php
@@ -155,7 +156,12 @@
                     ?>
                     <p class="mb-1 text-lg font-bold">Rp<?= $formattedCartTotal; ?></p>
                 </div>
-                <button class="bg-[#434C5E] hover:bg-[#81A1C1] text-[#E5E9F0] hover:text-[#434C5E] rounded-md px-3 py-2.5 transition-colors duration-200 border-2 border-black w-full mt-8">Check out</button>
+                <?= form_open('checkout/') ?>
+                <?= csrf_field(); ?>
+                <input type="hidden" name="_method" value="PUT">
+                <input type="hidden" name="transactionDate" value="<?= date('Y-m-d H:i:s'); ?>">
+                <input type="hidden" name="totalPrice" value="<?= $cartTotal; ?>">
+                <?= form_submit('submit', 'Check Out', ['class' => 'bg-[#434C5E] hover:bg-[#81A1C1] text-[#E5E9F0] hover:text-[#434C5E] rounded-md px-3 py-2.5 transition-colors duration-200 border-2 border-black w-full mt-8']) ?>
             </div>
         </div>
     <?php endif; ?>

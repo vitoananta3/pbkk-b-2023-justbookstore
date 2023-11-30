@@ -31,6 +31,9 @@ $routes->post('/auth/signup', 'Users::signUp');
 $routes->get('/signout', 'Users::signOut');
 
 $routes->get('/carts', 'Carts::index');
+$routes->get('/transactions', 'Carts::transactionsIndex');
+$routes->put('/checkout', 'Carts::checkout');
+$routes->get('/transactions/(:segment)', 'Carts::detail/$1');
 
 $routes->post('/saveitem', 'CartItems::saveItem');
 $routes->put('/updateitem/decrement/(:num)', 'CartItems::updateItemDecrement/$1');

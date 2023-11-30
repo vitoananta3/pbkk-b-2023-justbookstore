@@ -60,6 +60,9 @@
         <li>
           <a href="<?= base_url() ?>carts" class="block py-2 px-3 text-[#E5E9F0] rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-[#81A1C1] md:p-0 dark:text-white md:dark:hover:text-[#81A1C1] dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent <?php echo $page === 'carts' ? 'active-nav-item' : ''; ?>">Carts</a>
         </li>
+        <li>
+          <a href="<?= base_url() ?>transactions" class="block py-2 px-3 text-[#E5E9F0] rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-[#81A1C1] md:p-0 dark:text-white md:dark:hover:text-[#81A1C1] dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent <?php echo $page === 'transactions' ? 'active-nav-item' : ''; ?>">Transactions</a>
+        </li>
       </ul>
     </div>
   </div>

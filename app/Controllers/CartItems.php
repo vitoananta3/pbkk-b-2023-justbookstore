@@ -27,7 +27,7 @@ class CartItems extends BaseController
         if (!$activeCart) {
             $this->cartsModel->save([
                 'user_id' => $this->request->getVar('user_id'),
-                'isActive' => true
+                'isActive' => true,
             ]);
 
             $activeCart = $this->cartsModel->getActiveCart($this->request->getVar('user_id'));
