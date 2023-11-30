@@ -29,3 +29,7 @@ $routes->post('/signin', 'Users::signInFirst');
 $routes->get('/signup', 'Users::viewSignup');
 $routes->post('/auth/signup', 'Users::signUp');
 $routes->get('/signout', 'Users::signOut');
+
+$routes->get('/carts', 'Carts::index');
+
+$routes->post('/saveitem', 'CartItems::saveItem');
