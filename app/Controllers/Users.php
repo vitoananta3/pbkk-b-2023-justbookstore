@@ -91,7 +91,7 @@ class Users extends BaseController
             'isAdmin' => $this->request->getVar('isAdmin')
         ]);
 
-        session()->setFlashdata('success', 'Sign up successful');
+        session()->setFlashdata('message', 'Sign up successful');
         return redirect()->to('/signin');
     }
 
@@ -128,6 +128,7 @@ class Users extends BaseController
         if ($user) {
             if ($user['password'] == $password) {
                 session()->set('user', $user);
+                session()->setFlashdata('message', 'Welcome to JustBookStore');
                 return redirect()->to('/books');
             } else {
                 session()->setFlashdata('error', 'Email or Password is incorrect');
