@@ -1,6 +1,6 @@
-<?= $this->extend('layout\default') ?>
+<?= $this->extend('layout\template') ?>
 <?= $this->section('content') ?>
-<?= $this->include('component/guest/navbar') ?>
+<?= $this->include('component/navbar') ?>
 <div class="flex flex-col items-center bg-[#E5E9F0]">
     <div class="my-14"></div>
     <div class="flex items-center w-6/12 max-w-screen-xl mb-8">

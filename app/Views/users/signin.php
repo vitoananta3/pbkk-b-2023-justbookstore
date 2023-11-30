@@ -1,4 +1,4 @@
-<?= $this->extend('layout\default') ?>
+<?= $this->extend('layout\template') ?>
 <?= $this->section('content') ?>
 <div class="flex flex-col h-screen bg-[#434C5E] justify-center items-center">
     <?php if (session()->getFlashdata('message')) : ?>

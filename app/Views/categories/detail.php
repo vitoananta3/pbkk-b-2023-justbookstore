@@ -1,11 +1,11 @@
-<?= $this->extend('layout\default') ?>
+<?= $this->extend('layout\template') ?>
 <?= $this->section('content') ?>
-<?= $this->include('component/guest/navbar') ?>
+<?= $this->include('component/navbar') ?>
 <div class="flex flex-col items-center h-screen bg-[#E5E9F0]">
     <div class="my-8"></div>
     <div class="mt-8"></div>
     <div class="flex gap-4">
-        <a href="<?=  base_url(); ?>categories/edit/<?=  $category['slug']; ?>" class="max-w-screen-xl flex gap-2 text-sm bg-[#434C5E] hover:bg-[#81A1C1] text-[#E5E9F0] hover:text-[#434C5E] rounded-md px-3 py-2.5 transition-colors duration-200 border-2 border-black">
+        <a href="<?= base_url(); ?>categories/edit/<?= $category['slug']; ?>" class="max-w-screen-xl flex gap-2 text-sm bg-[#434C5E] hover:bg-[#81A1C1] text-[#E5E9F0] hover:text-[#434C5E] rounded-md px-3 py-2.5 transition-colors duration-200 border-2 border-black">
             <div>Edit Category</div>
         </a>
         <form action="<?= base_url(); ?>/categories/<?= $category['id']; ?>" method="post">

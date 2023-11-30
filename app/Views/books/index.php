@@ -1,6 +1,6 @@
-<?= $this->extend('layout\default') ?>
+<?= $this->extend('layout\template') ?>
 <?= $this->section('content') ?>
-<?= $this->include('component/guest/navbar') ?>
+<?= $this->include('component/navbar') ?>
 <div class="flex flex-col items-center h-screen bg-[#E5E9F0]">
     <div class="my-8"></div>
     <div class="mt-8"></div>

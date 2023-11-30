@@ -1,4 +1,4 @@
-<?= $this->extend('layout\default') ?>
+<?= $this->extend('layout\template') ?>
 <?= $this->section('content') ?>
 <div class="flex flex-col h-screen bg-[#434C5E] justify-center items-center">
     <div class="bg-[#E5E9F0] w-5/12 flex rounded-md outline p-12">
