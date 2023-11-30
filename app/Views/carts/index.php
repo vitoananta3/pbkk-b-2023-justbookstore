@@ -43,20 +43,38 @@
                     <?php foreach ($cartItems as $item) : ?>
                         <?php if ($book['id'] === $item['book_id']) : ?>
                             <div class="justify-between mb-6 rounded-lg bg-white p-6 shadow-md sm:flex sm:justify-start">
-                                <img src="<?= base_url(); ?>assets/books-cover/<?= $book['cover']; ?>" alt="product-image" class="w-full sm:w-40" />
+                                <div class="flex items-center">
+                                    <a href="<?= base_url(); ?>books/<?= $book['id']; ?>">
+                                        <img src="<?= base_url(); ?>assets/books-cover/<?= $book['cover']; ?>" alt="product-image" class="w-full sm:w-40" />
+                                    </a>
+                                </div>
                                 <div class="sm:ml-4 sm:flex sm:w-full sm:justify-between">
-                                    <div class="mt-5 sm:mt-0 w-2/3">
-                                        <h2 class="text-lg font-bold text-gray-900"><?= $book['title']; ?></h2>
-                                        <h2 class="mt-4 text-base font-semibold text-gray-900">Rp<?= $book['price']; ?> (@1)</h2>
-                                        <p class="mt-4 text-xs text-gray-700"><?= $book['author']; ?></p>
-                                        <p class="mt-4 text-xs text-gray-700"><?= $book['publisher']; ?></p>
-                                        <p class="mt-4 text-xs text-gray-700"><?= $book['synopsis']; ?></p>
+                                    <div class="mt-5 sm:mt-0 w-2/3 flex flex-col gap-4 justify-between">
+                                        <div class="flex flex-col gap-4">
+                                            <h2 class="text-lg font-bold text-gray-900"><?= $book['title']; ?></h2>
+                                            <h2 class=" text-base font-semibold text-gray-900">Rp<?= $book['price']; ?> (@1)</h2>
+                                            <p class=" text-xs text-gray-700"><?= $book['author']; ?></p>
+                                            <p class=" text-xs text-gray-700"><?= $book['publisher']; ?></p>
+                                            <p class=" text-xs text-gray-700"><?= $book['synopsis']; ?></p>
+                                        </div>
+                                        <div class="w-1/4 text-xs text-center bg-[#434C5E] hover:bg-[#81A1C1] text-[#E5E9F0] hover:text-[#434C5E] rounded-md px-2 py-2 transition-colors duration-200 border-2 border-black">
+                                            <a href="<?= base_url(); ?>books/<?= $book['id']; ?>">Detail book</a>
+                                        </div>
                                     </div>
                                     <div class="mt-4 flex justify-between sm:space-y-6 sm:mt-0 sm:block w/1-3 flex-col gap-4">
-                                        <div class="flex items-center border-gray-100">
-                                            <span class="cursor-pointer rounded-l bg-[#434C5E] py-1 px-3.5 duration-100 hover:bg-[#81A1C1] text-[#E5E9F0] hover:text-[#434C5E]"> - </span>
-                                            <input class="h-8 border bg-white text-center text-xs outline-none px-4 w-full" type="number" value="<?= $item['quantity']; ?>" min="1" />
-                                            <span class="cursor-pointer rounded-r bg-[#434C5E] py-1 px-3 duration-100 hover:bg-[#81A1C1] text-[#E5E9F0] hover:text-[#434C5E]"> + </span>
+                                        <div class="flex border border-[#434C5E] rounded-md">
+                                            <div class="cursor-pointer rounded-l bg-[#434C5E] py-1 px-3.5 duration-100 hover:bg-[#81A1C1] text-[#E5E9F0] hover:text-[#434C5E] flex justify-center items-center">
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-3 h-3">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 12h-15" />
+                                                </svg>
+
+                                            </div>
+                                            <div class=" flex h-8 border text-center outline-none w-full justify-center items-center"><?= $item['quantity']; ?></div>
+                                            <div class="cursor-pointer rounded-r bg-[#434C5E] py-1 px-3 duration-100 hover:bg-[#81A1C1] text-[#E5E9F0] hover:text-[#434C5E] flex items-center justify-center">
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                                                </svg>
+                                            </div>
                                         </div>
                                         <div class="flex items-center">
                                             <?php
