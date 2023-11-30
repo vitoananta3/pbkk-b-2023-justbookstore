@@ -36,32 +36,32 @@
     <?php else : ?>
         <div class="mx-auto max-w-screen-xl justify-center px-6 md:flex md:space-x-6 xl:px-0 w-full">
             <div class="rounded-lg md:w-2/3">
-                <?php
-                $cartTotal = 0; // Initialize the variable to hold the cart's total price
-                ?>
                 <?php if (empty($books)) : ?>
-                    <div class="flex w-full justify-center">
-                        <a href="<?= base_url(); ?>books" class="max-w-screen-xl flex gap-2 text-sm bg-[#434C5E] hover:bg-[#81A1C1] text-[#E5E9F0] hover:text-[#434C5E] rounded-md px-3 py-2.5 transition-colors duration-200 border-2 border-black">
-                            <div>Shop Now</div>
+                    <div class="flex justify-center">
+                        <a href="<?= base_url(); ?>books" class="bg-[#434C5E] hover:bg-[#81A1C1] text-[#E5E9F0] hover:text-[#434C5E] rounded-md px-3 py-2.5 transition-colors duration-200 border-2 border-black">
+                            Shop Now
                         </a>
                     </div>
-                    <div class="spa flex flex-col items-center text-[#434E5C] text-xl gap-2 mt-4">
+                    <div class="flex flex-col items-center text-[#434E5C] text-xl gap-2 mt-4">
                         <div>There are no items in your cart</div>
                         <div>Let's shop a book by clicking on the Shop Now above</div>
                     </div>
                 <?php else : ?>
                 <?php endif; ?>
+                <?php
+                $cartTotal = 0; // Initialize the variable to hold the cart's total price
+                ?>
                 <?php foreach ($books as $book) : ?>
                     <?php foreach ($cartItems as $item) : ?>
                         <?php if ($book['id'] === $item['book_id']) : ?>
                             <div class="justify-between mb-6 rounded-lg bg-white p-6 shadow-md sm:flex sm:justify-start">
-                                <div class="flex items-center">
+                                <div class="flex items-center justify-center w-1/5">
                                     <a href="<?= base_url(); ?>books/<?= $book['id']; ?>">
-                                        <img src="<?= base_url(); ?>assets/books-cover/<?= $book['cover']; ?>" alt="product-image" class="w-full sm:w-40" />
+                                        <img src="<?= base_url(); ?>assets/books-cover/<?= $book['cover']; ?>" alt="product-image" class="w-full" />
                                     </a>
                                 </div>
-                                <div class="sm:ml-4 sm:flex sm:justify-between gap-8">
-                                    <div class="mt-5 sm:mt-0 w-2/3 flex flex-col gap-4 justify-between">
+                                <div class="sm:ml-4 sm:flex sm:justify-between gap-8 w-full">
+                                    <div class="mt-5 sm:mt-0 flex flex-col gap-4 justify-between w-2/3">
                                         <div class="flex flex-col gap-4">
                                             <h2 class="text-lg font-bold text-gray-900"><?= $book['title']; ?></h2>
                                             <h2 class=" text-base font-semibold text-gray-900">Rp<?= $book['price']; ?> (@1)</h2>
@@ -73,36 +73,19 @@
                                             <a href="<?= base_url(); ?>books/<?= $book['id']; ?>">Detail book</a>
                                         </div>
                                     </div>
-                                    <div class="mt-4 flex sm:space-y-6 sm:mt-0 sm:block w-1/3 flex-col gap-4 h-full">
+                                    <div class="mt-4 flex sm:space-y-6 sm:mt-0 sm:block flex-col gap-4 h-full w-1/3">
                                         <div class="flex border border-[#434C5E] rounded-lg">
                                             <?= form_open('updateitem/decrement/' . $item['id']); ?>
                                             <?= csrf_field(); ?>
                                             <input type="hidden" name="_method" value="PUT">
                                             <?= form_submit('submit', '-', ['class' => 'bg-[#434C5E] hover:bg-[#81A1C1] text-[#E5E9F0] hover:text-[#434C5E] rounded-l-md w-full px-5 py-auto transition-colors duration-200 border-2 border-black h-full']) ?>
                                             <?= form_close() ?>
-                                            <!-- <div class="cursor-pointer rounded-l bg-[#434C5E] py-1 px-3.5 duration-100 hover:bg-[#81A1C1] text-[#E5E9F0] hover:text-[#434C5E] flex justify-center items-center">
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-3 h-3">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 12h-15" />
-                                                </svg>
-
-                                            </div> -->
                                             <div class=" flex h-8 border text-center outline-none w-full justify-center items-center"><?= $item['quantity']; ?></div>
                                             <?= form_open('updateitem/increment/' . $item['id']); ?>
                                             <?= csrf_field(); ?>
                                             <input type="hidden" name="_method" value="PUT">
-                                            <!-- <div class="cursor-pointer rounded-l bg-[#434C5E] py-1 px-3.5 duration-100 hover:bg-[#81A1C1] text-[#E5E9F0] hover:text-[#434C5E] flex justify-center items-center">
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-3 h-3">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 12h-15" />
-                                                </svg>
-
-                                            </div> -->
                                             <?= form_submit('submit', '+', ['class' => 'bg-[#434C5E] hover:bg-[#81A1C1] text-[#E5E9F0] hover:text-[#434C5E] rounded-r-md w-full px-5 py-auto transition-colors duration-200 border-2 border-black h-full']) ?>
                                             <?= form_close() ?>
-                                            <!-- <div class="cursor-pointer rounded-r bg-[#434C5E] py-1 px-3 duration-100 hover:bg-[#81A1C1] text-[#E5E9F0] hover:text-[#434C5E] flex items-center justify-center">
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-                                                </svg>
-                                            </div> -->
                                         </div>
                                         <div class="flex items-cente text-sm font-semibold justify-between">
                                             <?php

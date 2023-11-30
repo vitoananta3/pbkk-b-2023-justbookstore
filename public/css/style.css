@@ -972,6 +972,14 @@ video {
   width: 33.333333%;
 }
 
+.w-1\/5 {
+  width: 20%;
+}
+
+.w-4\/5 {
+  width: 80%;
+}
+
 .min-w-min {
   min-width: -moz-min-content;
   min-width: min-content;
@@ -995,6 +1003,16 @@ video {
 
 .max-w-xs {
   max-width: 20rem;
+}
+
+.max-w-min {
+  max-width: -moz-min-content;
+  max-width: min-content;
+}
+
+.max-w-fit {
+  max-width: -moz-fit-content;
+  max-width: fit-content;
 }
 
 .flex-none {
@@ -2001,6 +2019,10 @@ video {
 }
 
 @media (min-width: 640px) {
+  .sm\:invisible {
+    visibility: hidden;
+  }
+
   .sm\:ml-4 {
     margin-left: 1rem;
   }
