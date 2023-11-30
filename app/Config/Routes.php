@@ -36,7 +36,7 @@ $routes->put('/checkout', 'Carts::checkout');
 $routes->get('/transactions/(:segment)', 'Carts::detail/$1');
 
 $routes->post('/saveitem/(:num)', 'CartItems::saveItem/$1');
-$routes->put('/updateitem/(:num)', 'CartItems::updateStockBeforeDeleteItem/$1');
+$routes->put('/updateitem/(:num)', 'CartItems::updateStockBeforeDeleteItem  /$1');
 $routes->put('/updateitem/decrement/(:num)', 'CartItems::updateItemDecrement/$1');
 $routes->put('/updateitem/increment/(:num)', 'CartItems::updateItemIncrement/$1');
 $routes->delete('/deleteitem/(:num)', 'CartItems::deleteItem/$1');

@@ -132,28 +132,23 @@ class CartItems extends BaseController
         $item = $this->cartItemModel->find($id);
 
         if (!$item) {
-            // Handle case where item with given ID is not found
-            // You can throw an exception, return an error response, or handle it accordingly.
             return redirect()->to('/carts')->with('error', 'Item not found');
         }
 
         $book = $this->booksModel->getBookById($item['book_id']);
 
         if (!$book) {
-            // Handle case where book related to the item is not found
             return redirect()->to('/carts')->with('error', 'Book not found');
         }
 
         $cartStock = $item['quantity'];
         $stock = $book['stock'] + $cartStock;
 
-        // Update the stock in the booksModel
         $this->booksModel->save([
             'id' => $book['id'],
             'stock' => (string)$stock
         ]);
-
-        // Perform the item deletion only after successful stock update
+        
         return $this->deleteItem($id);
     }
 

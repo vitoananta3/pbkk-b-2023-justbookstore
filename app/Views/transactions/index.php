@@ -49,9 +49,6 @@
                 <?php else : ?>
                 <?php endif; ?>
                 <?php
-                $cartTotal = 0; // Initialize the variable to hold the cart's total price
-                ?>
-                <?php
                 $transactionCounter = 1; // Initialize the transaction counter outside the loop
 
                 foreach ($carts as $cart) :
@@ -79,11 +76,22 @@
                         </div>
                     </div>
                 <?php
-                    $transactionCounter++; // Increment the transaction counter for the next iteration
+                    $transactionCounter++;
                 endforeach;
                 ?>
 
             </div>
+            <?php
+            $transactionsTotalPrice = 0;
+
+            foreach ($carts as $cart) :
+                $totalPrice = $cart['totalPrice'];
+                $transactionsTotalPrice += $totalPrice;
+            endforeach;
+
+            // Format the total price for display
+            $formattedCartTotal = number_format($transactionsTotalPrice, 0, ',', '.');
+            ?>
             <!-- Sub total -->
             <div class="mt-6 h-full rounded-lg border bg-white p-6 shadow-md md:mt-0 md:w-1/3">
                 <p class="text-lg font-bold mb-4">Transaction Summary</p>
@@ -96,7 +104,7 @@
                 <div class="flex justify-between">
                     <p class="text-lg font-bold">Total</p>
                     <?php
-                    $formattedCartTotal = number_format($cartTotal, 0, ',', '.');
+                    $formattedCartTotal = number_format($transactionsTotalPrice, 0, ',', '.');
                     ?>
                     <p class="mb-1 text-lg font-bold">Rp<?= $formattedCartTotal; ?></p>
                 </div>
