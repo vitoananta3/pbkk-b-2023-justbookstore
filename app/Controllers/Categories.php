@@ -64,6 +64,11 @@ class Categories extends BaseController
 
     public function save()
     {
+        $user = session()->get('user');
+        if (!$user || $user['isAdmin'] != '1') {
+            return redirect()->to('/signin');
+        }
+
         $validation = \Config\Services::validation();
 
         $rules = [
@@ -97,6 +102,11 @@ class Categories extends BaseController
 
     public function edit($slug)
     {
+        $user = session()->get('user');
+        if (!$user || $user['isAdmin'] != '1') {
+            return redirect()->to('/signin');
+        }
+
         $data = [
             'title' => 'Edit Category | JustBookStore',
             'page' => 'categories',
@@ -108,6 +118,11 @@ class Categories extends BaseController
     }
 
     public function update($id) {
+        $user = session()->get('user');
+        if (!$user || $user['isAdmin'] != '1') {
+            return redirect()->to('/signin');
+        }
+
         $validation = \Config\Services::validation();
 
         $rules = [
@@ -148,6 +163,11 @@ class Categories extends BaseController
 
     public function delete($id)
     {
+        $user = session()->get('user');
+        if (!$user || $user['isAdmin'] != '1') {
+            return redirect()->to('/signin');
+        }
+
         $this->categoriesModel->delete($id);
         session()->setFlashdata('message', 'Category has been deleted.');
         return redirect()->to('/categories');
