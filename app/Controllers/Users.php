@@ -95,7 +95,9 @@ class Users extends BaseController
         return redirect()->to('/signin');
     }
 
-    public function signIn() {
+    public function signIn()
+    {
+
         $validation = \Config\Services::validation();
 
         $rules = [
@@ -137,11 +139,18 @@ class Users extends BaseController
         } else {
             session()->setFlashdata('error', 'Email or Password is incorrect');
             return redirect()->to('/signin')->withInput();
-        }   
+        }
     }
 
-    public function signOut() {
+    public function signOut()
+    {
         session()->destroy();
+        return redirect()->to('/signin');
+    }
+
+    public function signInFirst()
+    {
+        session()->setFlashdata('message', 'You have to sign in first to add to cart or buy the book');
         return redirect()->to('/signin');
     }
 }

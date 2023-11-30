@@ -25,6 +25,7 @@ $routes->get('/categories/(:segment)', 'Categories::detail/$1');
 
 $routes->get('/signin', 'Users::viewSignin');
 $routes->post('/auth/signin', 'Users::signIn');
+$routes->post('/signin', 'Users::signInFirst');
 $routes->get('/signup', 'Users::viewSignup');
 $routes->post('/auth/signup', 'Users::signUp');
 $routes->get('/signout', 'Users::signOut');
