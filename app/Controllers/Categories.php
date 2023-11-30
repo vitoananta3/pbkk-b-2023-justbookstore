@@ -27,6 +27,11 @@ class Categories extends BaseController
 
     public function detail($slug)
     {
+        $user = session()->get('user');
+        if (!$user) {
+            return redirect()->to('/signin');
+        }
+
         $data = [
             'title' => 'Category Detail | JustBookStore',
             'page' => 'categories',
@@ -44,6 +49,11 @@ class Categories extends BaseController
 
     public function create()
     {
+        $user = session()->get('user');
+        if (!$user || $user['isAdmin'] != '1') {
+            return redirect()->to('/signin');
+        }
+
         $data = [
             'title' => 'Add Category | JustBookStore',
             'page' => 'categories',

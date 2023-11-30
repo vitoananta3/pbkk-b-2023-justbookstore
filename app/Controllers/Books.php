@@ -49,6 +49,11 @@ class Books extends BaseController
 
     public function create()
     {
+        $user = session()->get('user');
+        if (!$user || $user['isAdmin'] != '1') {
+            return redirect()->to('/signin');
+        }
+
         $data = [
             'title' => 'Add Book | JustBookStore',
             'page' => 'books',
@@ -63,6 +68,11 @@ class Books extends BaseController
 
     public function save()
     {
+        $user = session()->get('user');
+        if (!$user || $user['isAdmin'] != '1') {
+            return redirect()->to('/signin');
+        }
+
         $categoryIds = $this->categoriesModel->getCategoryIds();
 
         $validation = \Config\Services::validation();
@@ -180,6 +190,11 @@ class Books extends BaseController
 
     public function edit($slug)
     {
+        $user = session()->get('user');
+        if (!$user || $user['isAdmin'] != '1') {
+            return redirect()->to('/signin');
+        }
+
         $data = [
             'title' => 'Edit Book | JustBookStore',
             'page' => 'books',
@@ -193,6 +208,11 @@ class Books extends BaseController
 
     public function update($id)
     {
+        $user = session()->get('user');
+        if (!$user || $user['isAdmin'] != '1') {
+            return redirect()->to('/signin');
+        }
+
         // dd($this->request->getVar());
         $categoryIds = $this->categoriesModel->getCategoryIds();
 
@@ -323,6 +343,11 @@ class Books extends BaseController
 
     public function delete($id)
     {
+
+        $user = session()->get('user');
+        if (!$user || $user['isAdmin'] != '1') {
+            return redirect()->to('/signin');
+        }
 
         if ($this->booksModel->getBookById($id)['cover'] != 'no-cover.jpg') {
             unlink('assets/books-cover/' . $this->booksModel->getBookById($id)['cover']);

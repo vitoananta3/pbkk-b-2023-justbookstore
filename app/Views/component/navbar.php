@@ -1,9 +1,9 @@
 <nav class="bg-[#434C5E] fixed w-full z-20 top-0 start-0">
-  <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto py-4">
-    <a href="<?= base_url() ?>" class="flex items-center space-x-3 rtl:space-x-reverse">
+  <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto py-4 ">
+    <a href="<?= base_url() ?>" class="flex items-center space-x-3 rtl:space-x-reverse ">
       <span class="self-center text-2xl font-semibold whitespace-nowrap text-[#E5E9F0]" id="nav-logo">JustBookStore</span>
     </a>
-    <div class="flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
+    <div class="flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse bg-or">
       <button type="button" class="flex text-sm items-center" id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown" data-dropdown-placement="bottom">
         <span class="sr-only">Open user menu</span>
         <div class="w-8 h-8 rounded-full bg-gray-800 md:me-0 flex items-center justify-center">
@@ -67,6 +67,9 @@
         <?php else : ?>
           <li>
             <a href="<?= base_url() ?>" class="block py-2 px-3 text-[#E5E9F0] rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-[#81A1C1] md:p-0 dark:text-white md:dark:hover:text-[#81A1C1] dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent <?php echo $page === 'home' ? 'active-nav-item' : ''; ?>">Home</a>
+          </li>
+          <li>
+            <a href="<?= base_url() ?>categories" class="block py-2 px-3 text-[#E5E9F0] rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-[#81A1C1] md:p-0 dark:text-white md:dark:hover:text-[#81A1C1] dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent <?php echo $page === 'categories' ? 'active-nav-item' : ''; ?>">Categories</a>
           </li>
           <li>
             <a href="<?= base_url() ?>books" class="block py-2 px-3 text-[#E5E9F0] rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-[#81A1C1] md:p-0 dark:text-white md:dark:hover:text-[#81A1C1] dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent <?php echo $page === 'books' ? 'active-nav-item' : ''; ?>">Books</a>

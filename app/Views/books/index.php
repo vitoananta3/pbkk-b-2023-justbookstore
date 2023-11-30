@@ -34,8 +34,12 @@
     <?php endif; ?>
     <?php if (empty($books)) : ?>
         <div class="spa flex flex-col items-center mt-8 text-[#434E5C] text-xl gap-4">
-            <div>There are no books.</div>
-            <div>Let's create a book by clicking on the Add Book button above!</div>
+            <div>There are no books</div>
+            <?php if (session()->has('user')) : ?>
+                <?php $user = session()->get('user'); ?>
+                <?php if ($user['isAdmin'] == '1') ?>
+                <div>Let's create a book by clicking on the Add Book button above!</div>
+            <?php endif; ?>
         </div>
     <?php else : ?>
         <div class="grid grid-cols-6 grid-flow-row gap-6 max-w-screen-xl mx-auto py-8">
