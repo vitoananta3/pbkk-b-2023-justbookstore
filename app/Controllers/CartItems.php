@@ -108,7 +108,7 @@ class CartItems extends BaseController
 
         $book = $this->booksModel->find($item['book_id']);
 
-        if ($item['quantity'] >= $book['stock']) {
+        if ($book['stock'] <= 0) {
             session()->setFlashdata('message', 'Item quantity cannot be more than stock');
             return redirect()->to('/carts');
         }
