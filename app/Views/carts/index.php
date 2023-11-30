@@ -96,9 +96,9 @@
                                             <div>Rp<?= $formattedPrice; ?></div>
                                         </div>
                                         <div class="flex gap-4 justify-end flex-grow">
-                                            <form action="<?= base_url(); ?>deleteitem/<?= $item['id']; ?>" method="post">
+                                            <form action="<?= base_url(); ?>updateitem/<?= $item['id']; ?>" method="post">
                                                 <?= csrf_field(); ?>
-                                                <input type="hidden" name="_method" value="DELETE">
+                                                <input type="hidden" name="_method" value="PUT">
 
                                                 <button type="button" data-modal-target="popup-modal" data-modal-toggle="popup-modal" class="max-w-screen-xl flex gap-2 text-sm bg-[#434C5E] hover:bg-[#81A1C1] text-[#E5E9F0] hover:text-[#434C5E] rounded-md px-3 py-2.5 transition-colors duration-200 opacity-70 border-2 border-black" id="pop-button">
                                                     <div class="flex justify-center items-center gap-4">

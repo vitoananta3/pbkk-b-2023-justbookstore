@@ -17,42 +17,34 @@ class CartItems extends BaseController
         $this->booksModel = new \App\Models\BooksModel();
     }
 
-    public function saveItem()
+    public function saveItem($id)
     {
 
         // dd($this->request->getVar());
 
-        $activeCart = $this->cartsModel->getActiveCart($this->request->getVar('user_id'));
+        $book = $this->booksModel->getBookById($id);
+        $stock = $book['stock'];
 
-        if (!$activeCart) {
-            $this->cartsModel->save([
-                'user_id' => $this->request->getVar('user_id'),
-                'isActive' => true,
+        if ($book['stock'] < 1) {
+            session()->setFlashdata('message', 'Book is out of stock');
+            return redirect()->to('/books/' . $id);
+        } else {
+
+            $this->booksModel->save([
+                'id' => $book['id'],
+                'stock' => $book['stock'] - 1
             ]);
 
             $activeCart = $this->cartsModel->getActiveCart($this->request->getVar('user_id'));
 
-            $this->cartItemModel->save([
-                'cart_id' => $activeCart['id'],
-                'book_id' => $this->request->getVar('book_id'),
-                'quantity' => $this->request->getVar('quantity')
-            ]);
-
-            session()->setFlashdata('message', 'Item added to cart');
-            return redirect()->to('/carts');
-        } else {
-
-            $isItemExist = $this->cartItemModel->isItemExist($activeCart['id'], $this->request->getVar('book_id'));
-
-            if ($isItemExist) {
-                $this->cartItemModel->save([
-                    'id' => $isItemExist['id'],
-                    'quantity' => $isItemExist['quantity'] + $this->request->getVar('quantity')
+            if (!$activeCart) {
+                $this->cartsModel->save([
+                    'user_id' => $this->request->getVar('user_id'),
+                    'isActive' => true,
                 ]);
 
-                session()->setFlashdata('message', 'Item added to cart');
-                return redirect()->to('/carts');
-            } else {
+                $activeCart = $this->cartsModel->getActiveCart($this->request->getVar('user_id'));
+
                 $this->cartItemModel->save([
                     'cart_id' => $activeCart['id'],
                     'book_id' => $this->request->getVar('book_id'),
@@ -61,17 +53,45 @@ class CartItems extends BaseController
 
                 session()->setFlashdata('message', 'Item added to cart');
                 return redirect()->to('/carts');
+            } else {
+
+                $isItemExist = $this->cartItemModel->isItemExist($activeCart['id'], $this->request->getVar('book_id'));
+
+                if ($isItemExist) {
+                    $this->cartItemModel->save([
+                        'id' => $isItemExist['id'],
+                        'quantity' => $isItemExist['quantity'] + $this->request->getVar('quantity')
+                    ]);
+
+                    session()->setFlashdata('message', 'Item added to cart');
+                    return redirect()->to('/carts');
+                } else {
+                    $this->cartItemModel->save([
+                        'cart_id' => $activeCart['id'],
+                        'book_id' => $this->request->getVar('book_id'),
+                        'quantity' => $this->request->getVar('quantity')
+                    ]);
+
+                    session()->setFlashdata('message', 'Item added to cart');
+                    return redirect()->to('/carts');
+                }
             }
         }
     }
 
-    public function updateItemDecrement($id) {
+    public function updateItemDecrement($id)
+    {
         $item = $this->cartItemModel->find($id);
+        $book = $this->booksModel->getBookById($item['book_id']);
 
         if ($item['quantity'] > 1) {
             $this->cartItemModel->save([
                 'id' => $id,
                 'quantity' => $item['quantity'] - 1
+            ]);
+            $this->booksModel->save([
+                'id' => $item['book_id'],
+                'stock' => $book['stock'] + 1
             ]);
         } else if ($item['quantity'] == 1) {
             session()->setFlashdata('message', 'Click Remove to delete item');
@@ -82,7 +102,8 @@ class CartItems extends BaseController
         return redirect()->to('/carts');
     }
 
-    public function updateItemIncrement($id) {
+    public function updateItemIncrement($id)
+    {
         $item = $this->cartItemModel->find($id);
 
         $book = $this->booksModel->find($item['book_id']);
@@ -91,21 +112,54 @@ class CartItems extends BaseController
             session()->setFlashdata('message', 'Item quantity cannot be more than stock');
             return redirect()->to('/carts');
         }
-        
+
         $this->cartItemModel->save([
             'id' => $id,
             'quantity' => $item['quantity'] + 1
+        ]);
+
+        $this->booksModel->save([
+            'id' => $item['book_id'],
+            'stock' => $book['stock'] - 1
         ]);
 
         session()->setFlashdata('message', 'Item updated');
         return redirect()->to('/carts');
     }
 
+    public function updateStockBeforeDeleteItem($id)
+    {
+        $item = $this->cartItemModel->find($id);
+
+        if (!$item) {
+            // Handle case where item with given ID is not found
+            // You can throw an exception, return an error response, or handle it accordingly.
+            return redirect()->to('/carts')->with('error', 'Item not found');
+        }
+
+        $book = $this->booksModel->getBookById($item['book_id']);
+
+        if (!$book) {
+            // Handle case where book related to the item is not found
+            return redirect()->to('/carts')->with('error', 'Book not found');
+        }
+
+        $cartStock = $item['quantity'];
+        $stock = $book['stock'] + $cartStock;
+
+        // Update the stock in the booksModel
+        $this->booksModel->save([
+            'id' => $book['id'],
+            'stock' => (string)$stock
+        ]);
+
+        // Perform the item deletion only after successful stock update
+        return $this->deleteItem($id);
+    }
+
     public function deleteItem($id)
     {
         $this->cartItemModel->delete($id);
-
-        session()->setFlashdata('message', 'Item deleted from cart');
-        return redirect()->to('/carts');
+        return redirect()->to('/carts')->with('message', 'Item deleted from cart');
     }
 }
