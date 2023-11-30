@@ -224,7 +224,7 @@ class Init extends Seeder
                 'firstName' => 'admin',
                 'lastName' => 'JustBookStore',
                 'email' => 'admin@gmail.com',
-                'password' => 'admin21',
+                'password' => 'admin2193',
                 'isAdmin' => '1',
                 'created_at' => Time::now(),
                 'updated_at' => Time::now(),
