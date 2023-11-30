@@ -8,11 +8,13 @@ class CartItems extends BaseController
 {
     protected $cartItemModel;
     protected $cartsModel;
+    protected $booksModel;
 
     public function __construct()
     {
         $this->cartItemModel = new \App\Models\CartItemModel();
         $this->cartsModel = new \App\Models\CartModel();
+        $this->booksModel = new \App\Models\BooksModel();
     }
 
     public function saveItem()
@@ -61,6 +63,42 @@ class CartItems extends BaseController
                 return redirect()->to('/carts');
             }
         }
+    }
+
+    public function updateItemDecrement($id) {
+        $item = $this->cartItemModel->find($id);
+
+        if ($item['quantity'] > 1) {
+            $this->cartItemModel->save([
+                'id' => $id,
+                'quantity' => $item['quantity'] - 1
+            ]);
+        } else if ($item['quantity'] == 1) {
+            session()->setFlashdata('message', 'Click Remove to delete item');
+            return redirect()->to('/carts');
+        }
+
+        session()->setFlashdata('message', 'Item updated');
+        return redirect()->to('/carts');
+    }
+
+    public function updateItemIncrement($id) {
+        $item = $this->cartItemModel->find($id);
+
+        $book = $this->booksModel->find($item['book_id']);
+
+        if ($item['quantity'] >= $book['stock']) {
+            session()->setFlashdata('message', 'Item quantity cannot be more than stock');
+            return redirect()->to('/carts');
+        }
+        
+        $this->cartItemModel->save([
+            'id' => $id,
+            'quantity' => $item['quantity'] + 1
+        ]);
+
+        session()->setFlashdata('message', 'Item updated');
+        return redirect()->to('/carts');
     }
 
     public function deleteItem($id)

@@ -33,4 +33,6 @@ $routes->get('/signout', 'Users::signOut');
 $routes->get('/carts', 'Carts::index');
 
 $routes->post('/saveitem', 'CartItems::saveItem');
+$routes->put('/updateitem/decrement/(:num)', 'CartItems::updateItemDecrement/$1');
+$routes->put('/updateitem/increment/(:num)', 'CartItems::updateItemIncrement/$1');
 $routes->delete('/deleteitem/(:num)', 'CartItems::deleteItem/$1');

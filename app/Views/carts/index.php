@@ -60,7 +60,7 @@
                                         <img src="<?= base_url(); ?>assets/books-cover/<?= $book['cover']; ?>" alt="product-image" class="w-full sm:w-40" />
                                     </a>
                                 </div>
-                                <div class="sm:ml-4 sm:flex sm:w-full sm:justify-between gap-8">
+                                <div class="sm:ml-4 sm:flex sm:justify-between gap-8">
                                     <div class="mt-5 sm:mt-0 w-2/3 flex flex-col gap-4 justify-between">
                                         <div class="flex flex-col gap-4">
                                             <h2 class="text-lg font-bold text-gray-900"><?= $book['title']; ?></h2>
@@ -74,19 +74,35 @@
                                         </div>
                                     </div>
                                     <div class="mt-4 flex sm:space-y-6 sm:mt-0 sm:block w-1/3 flex-col gap-4 h-full">
-                                        <div class="flex border border-[#434C5E] rounded-md">
-                                            <div class="cursor-pointer rounded-l bg-[#434C5E] py-1 px-3.5 duration-100 hover:bg-[#81A1C1] text-[#E5E9F0] hover:text-[#434C5E] flex justify-center items-center">
+                                        <div class="flex border border-[#434C5E] rounded-lg">
+                                            <?= form_open('updateitem/decrement/' . $item['id']); ?>
+                                            <?= csrf_field(); ?>
+                                            <input type="hidden" name="_method" value="PUT">
+                                            <?= form_submit('submit', '-', ['class' => 'bg-[#434C5E] hover:bg-[#81A1C1] text-[#E5E9F0] hover:text-[#434C5E] rounded-l-md w-full px-5 py-auto transition-colors duration-200 border-2 border-black h-full']) ?>
+                                            <?= form_close() ?>
+                                            <!-- <div class="cursor-pointer rounded-l bg-[#434C5E] py-1 px-3.5 duration-100 hover:bg-[#81A1C1] text-[#E5E9F0] hover:text-[#434C5E] flex justify-center items-center">
                                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-3 h-3">
                                                     <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 12h-15" />
                                                 </svg>
 
-                                            </div>
+                                            </div> -->
                                             <div class=" flex h-8 border text-center outline-none w-full justify-center items-center"><?= $item['quantity']; ?></div>
-                                            <div class="cursor-pointer rounded-r bg-[#434C5E] py-1 px-3 duration-100 hover:bg-[#81A1C1] text-[#E5E9F0] hover:text-[#434C5E] flex items-center justify-center">
+                                            <?= form_open('updateitem/increment/' . $item['id']); ?>
+                                            <?= csrf_field(); ?>
+                                            <input type="hidden" name="_method" value="PUT">
+                                            <!-- <div class="cursor-pointer rounded-l bg-[#434C5E] py-1 px-3.5 duration-100 hover:bg-[#81A1C1] text-[#E5E9F0] hover:text-[#434C5E] flex justify-center items-center">
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-3 h-3">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 12h-15" />
+                                                </svg>
+
+                                            </div> -->
+                                            <?= form_submit('submit', '+', ['class' => 'bg-[#434C5E] hover:bg-[#81A1C1] text-[#E5E9F0] hover:text-[#434C5E] rounded-r-md w-full px-5 py-auto transition-colors duration-200 border-2 border-black h-full']) ?>
+                                            <?= form_close() ?>
+                                            <!-- <div class="cursor-pointer rounded-r bg-[#434C5E] py-1 px-3 duration-100 hover:bg-[#81A1C1] text-[#E5E9F0] hover:text-[#434C5E] flex items-center justify-center">
                                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
                                                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
                                                 </svg>
-                                            </div>
+                                            </div> -->
                                         </div>
                                         <div class="flex items-cente text-sm font-semibold justify-between">
                                             <?php
